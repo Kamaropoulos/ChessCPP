@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Board\Board.cpp" />
     <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Move\Move.cpp" />
     <ClCompile Include="Pieces\Bishop\Bishop.cpp" />
     <ClCompile Include="Pieces\King\King.cpp" />
