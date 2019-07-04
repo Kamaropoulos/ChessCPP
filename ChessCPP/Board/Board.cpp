@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "../Pieces/King/King.h"
 
 int Board::_letterToNumber(char letter) {
 	return (int)letter - 'a' + 1;
@@ -11,6 +12,7 @@ pair<int, int> Board::_notationToFileAndRank(string notation) {
 }
 
 Board::Board() {
+	// Create squares
 	this->squares = new Square * *[8];
 	for (int file = 0; file < 8; ++file) {
 		this->squares[file] = new Square * [8];
@@ -19,6 +21,9 @@ Board::Board() {
 			this->squares[file][rank] = new Square();
 		}
 	}
+
+	// Create chess pieces and attach them to their squares
+	this->getSquare("a1")->placePiece(new King(WHITE));
 }
 
 Square* Board::getSquare(string notation) {
