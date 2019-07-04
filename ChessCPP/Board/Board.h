@@ -1,5 +1,20 @@
 #pragma once
-class Board
-{
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include "../Square/Square.h"
+
+using namespace std;
+
+class Board {
+private:
+	Square*** squares = nullptr;
+	int _letterToNumber(char letter);
+	pair<int, int> _notationToFileAndRank(string notation);
+
+public:
+	Board();
+	Square* getSquare(string notation);
 };
 
