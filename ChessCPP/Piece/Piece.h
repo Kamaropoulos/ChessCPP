@@ -1,5 +1,10 @@
 #pragma once
-class Piece
-{
+
+enum Color { WHITE, BLACK };
+
+class Piece {
+public:
+	Color color;
+	Piece(Color color);
 };
 
