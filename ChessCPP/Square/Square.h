@@ -1,5 +1,7 @@
 #pragma once
-class Square
-{
+#include "../Piece/Piece.h"
+class Square {
+public:
+	Piece* piece;
 };
 
