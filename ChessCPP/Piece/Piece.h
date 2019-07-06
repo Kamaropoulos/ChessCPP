@@ -12,6 +12,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include "../Move/Move.h"
 
 using namespace std;
 
@@ -22,4 +24,5 @@ public:
 	Color color;
 	Piece(Color color);
 	virtual string pieceName() = 0;
+	virtual vector<Move*> getAvailableMoves() = 0;
 };
