@@ -22,6 +22,7 @@ using namespace std;
 class Game {
 private:
 	Board* board;
+	unsigned char playerTurn;
 
 public:
 	/**

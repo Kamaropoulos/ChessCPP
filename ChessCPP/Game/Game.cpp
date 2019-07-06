@@ -36,4 +36,6 @@ Game::Game() {
 			}
 		}
 	}
+
+	this->playerTurn = 1;
 }
