@@ -4,5 +4,6 @@ class King :
 	public Piece {
 public:
 	King(Color color);
+	string pieceName() { return "King"; }
 };
 
