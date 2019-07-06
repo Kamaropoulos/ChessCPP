@@ -12,7 +12,6 @@ private:
 	Square*** squares = nullptr;
 	int _letterToNumber(char letter);
 	pair<int, int> _notationToFileAndRank(string notation);
-	void _createPieces();
 
 public:
 	Board();
