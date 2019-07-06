@@ -20,4 +20,5 @@ public:
 	void placePiece(Piece* piece);
 	bool hasPiece();
 	Piece* getPiece();
+	Color getColor();
 };

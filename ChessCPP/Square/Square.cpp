@@ -27,3 +27,7 @@ bool Square::hasPiece() {
 Piece* Square::getPiece() {
 	return this->piece;
 }
+
+Color Square::getColor() {
+	return this->color;
+}
