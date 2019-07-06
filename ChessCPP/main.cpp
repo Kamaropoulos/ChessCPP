@@ -11,6 +11,11 @@
 
 #include "Game/Game.h"
 
+/**
+ * @brief Entry point.
+ * 
+ * @return int 
+ */
 int main() {
 	Game* game = new Game();
 }
