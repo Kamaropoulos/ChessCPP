@@ -15,10 +15,18 @@
 
 using namespace std;
 
+/**
+ * @brief Game class
+ * 
+ */
 class Game {
 private:
 	Board* board;
 
 public:
+	/**
+	 * @brief Construct a new Game object
+	 * 
+	 */
 	Game();
 };

@@ -11,6 +11,11 @@
 
 #include "Game.h"
 
+/**
+ * @brief Construct a new Game:: Game object
+ * 
+ * It creates a new board and the pieces for the two players.
+ */
 Game::Game() {
 	this->board = new Board();
 
