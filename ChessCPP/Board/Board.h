@@ -1,3 +1,14 @@
+/**
+ * @file Board.h
+ * @author Konstantinos Kamaropoulos (k@kamaropoulos.com)
+ * @brief Header file for the chess board, holding information for the squares and the pieces on them.
+ * @version 0.1
+ * @date 2019-07-06
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 #pragma once
 
 #include <vector>

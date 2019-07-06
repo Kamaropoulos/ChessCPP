@@ -1,3 +1,14 @@
+/**
+ * @file Board.cpp
+ * @author Konstantinos Kamaropoulos (k@kamaropoulos.com)
+ * @brief The chess board, holding information for the squares and the pieces on them.
+ * @version 0.1
+ * @date 2019-07-06
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 #include "Board.h"
 
 #include "../Pieces/Rook/Rook.h"
