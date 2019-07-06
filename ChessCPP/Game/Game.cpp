@@ -25,14 +25,14 @@ Game::Game() {
 			Square* sq = this->board->getSquare(files[file] + to_string(rank));
 			if (sq != nullptr) {
 				if (this->board->getSquare(files[file] + to_string(rank))->hasPiece()) {
-					cout << files[file] << to_string(rank) << " is " << this->board->getSquare(files[file] + to_string(rank))->getPiece()->pieceName() << endl;
+					cout << "Square " << files[file] << to_string(rank) << " is " << ((this->board->getSquare(files[file] + to_string(rank))->getColor() == BLACK) ? "black" : "white") << " and holds a " << ((this->board->getSquare(files[file] + to_string(rank))->getPiece()->color == BLACK) ? "black " : "white ") << this->board->getSquare(files[file] + to_string(rank))->getPiece()->pieceName() << endl;
 				}
 				else {
-					cout << files[file] << to_string(rank) << " is empty" << endl;
+					cout << "Square " << files[file] << to_string(rank) << " is " << ((this->board->getSquare(files[file] + to_string(rank))->getColor() == BLACK) ? "black" : "white") << " and it's empty" << endl;
 				}
 			}
 			else {
-				cout << files[file] << to_string(rank) << " is null" << endl;
+				cout << "Square " << files[file] << to_string(rank) << " is null" << endl;
 			}
 		}
 	}
