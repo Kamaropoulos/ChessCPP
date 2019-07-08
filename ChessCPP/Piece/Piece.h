@@ -23,9 +23,12 @@ using namespace std;
 enum Color { WHITE, BLACK };
 
 class Piece {
+private:
+	bool moved;
 public:
 	Color color;
 	Piece(Color color);
+	bool hasMoved();
 	virtual string pieceName() = 0;
 	virtual vector<Move*> getAvailableMoves(Board* board) = 0;
 };

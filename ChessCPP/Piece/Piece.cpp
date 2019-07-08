@@ -13,4 +13,9 @@
 
 Piece::Piece(Color color) {
 	this->color = color;
+	this->moved = false;
+}
+
+bool Piece::hasMoved() {
+	return this->moved;
 }
