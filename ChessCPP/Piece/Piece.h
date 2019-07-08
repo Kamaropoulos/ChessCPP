@@ -9,12 +9,14 @@
  * 
  */
 
+#include "../Move/Move.h"
+class Board; // Forward declare Board
+
 #pragma once
 
 #include <string>
 #include <iostream>
 #include <vector>
-#include "../Move/Move.h"
 
 using namespace std;
 
@@ -25,5 +27,5 @@ public:
 	Color color;
 	Piece(Color color);
 	virtual string pieceName() = 0;
-	virtual vector<Move*> getAvailableMoves();
+	virtual vector<Move*> getAvailableMoves(Board* board) = 0;
 };
