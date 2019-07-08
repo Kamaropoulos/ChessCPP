@@ -23,7 +23,7 @@ using namespace std;
 enum Color { WHITE, BLACK };
 
 class Piece {
-private:
+protected:
 	bool moved;
 public:
 	Color color;
