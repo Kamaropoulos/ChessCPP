@@ -16,5 +16,6 @@ class Queen :
 public:
 	Queen(Color color);
 	string pieceName() { return "Queen"; }
+	vector<Move*> getAvailableMoves(Board* board);
 };
 

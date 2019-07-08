@@ -13,3 +13,8 @@
 
 Bishop::Bishop(Color color) : Piece(color) {
 }
+
+vector<Move*> Bishop::getAvailableMoves(Board* board) {
+	cout << "getAvalableMoves for " << this->pieceName() << endl;
+	return vector<Move*>();
+}
