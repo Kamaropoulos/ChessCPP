@@ -16,5 +16,6 @@ class Pawn :
 public:
 	Pawn(Color color);
 	string pieceName() { return "Pawn"; }
+	vector<Move*> getAvailableMoves() override;
 };
 

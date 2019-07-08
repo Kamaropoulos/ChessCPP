@@ -13,3 +13,8 @@
 
 Pawn::Pawn(Color color) : Piece(color) {
 }
+
+vector<Move*> Pawn::getAvailableMoves() {
+	cout << "getAvalableMoves for " << this->pieceName() << endl;
+	return vector<Move*>();
+}
