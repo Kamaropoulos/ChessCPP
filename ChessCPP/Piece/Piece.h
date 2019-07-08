@@ -25,9 +25,11 @@ enum Color { WHITE, BLACK };
 class Piece {
 protected:
 	bool moved;
-public:
+	string position;
 	Color color;
-	Piece(Color color);
+public:
+	Piece(string position, Color color);
+	string getPosition();
 	bool hasMoved();
 	virtual string pieceName() = 0;
 	virtual vector<Move*> getAvailableMoves(Board* board) = 0;
