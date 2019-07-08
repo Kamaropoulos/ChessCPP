@@ -13,3 +13,8 @@
 
 Rook::Rook(Color color) : Piece(color) {
 }
+
+vector<Move*> Rook::getAvailableMoves() {
+	cout << "getAvalableMoves for " << this->pieceName() << endl;
+	return vector<Move*>();
+}

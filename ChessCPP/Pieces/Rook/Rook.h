@@ -16,5 +16,6 @@ class Rook :
 public:
 	Rook(Color color);
 	string pieceName() { return "Rook"; }
+	vector<Move*> getAvailableMoves() override;
 };
 
