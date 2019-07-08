@@ -14,3 +14,7 @@
 Piece::Piece(Color color) {
 	this->color = color;
 }
+
+vector<Move*> Piece::getAvailableMoves() {
+	return vector<Move*>();
+}

@@ -12,6 +12,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include <vector>
 #include "../Move/Move.h"
 
@@ -24,5 +25,5 @@ public:
 	Color color;
 	Piece(Color color);
 	virtual string pieceName() = 0;
-	virtual vector<Move*> getAvailableMoves() = 0;
+	virtual vector<Move*> getAvailableMoves();
 };
