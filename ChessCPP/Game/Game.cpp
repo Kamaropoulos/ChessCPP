@@ -38,4 +38,7 @@ Game::Game() {
 	}
 
 	this->playerTurn = 1;
+
+	this->board->getSquare("a2")->getPiece()->getAvailableMoves();
+	this->board->getSquare("a1")->getPiece()->getAvailableMoves();
 }
