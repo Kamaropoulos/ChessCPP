@@ -9,6 +9,11 @@ char Position::_numberToLetter(int number) {
 	return (char)number + 'a' - 1;
 }
 
+// TODO: Maybe replace with operator= overload for file and rank to trigger this automagically
+void Position::_updateString() {
+	this->str = this->_numberToLetter(this->file) + to_string(this->rank);
+}
+
 pair<int, int> Position::stringToFileAndRank(string notation) {
 	// Convert the first character to a number
 	int file = Position::_letterToNumber(notation.at(0));
@@ -30,9 +35,9 @@ Position::Position(string posStr) {
 		int rank = this->stringToFileAndRank(posStr).second;
 
 		if (((file > 0) && (file <= 8)) && ((rank > 0) && (rank <= 8))) {
-			this->str = posStr;
 			this->file = file;
 			this->rank = rank;
+			this->_updateString();
 
 			return;
 		}
@@ -42,9 +47,9 @@ Position::Position(string posStr) {
 
 Position::Position(int file, int rank) {
 	if (((file > 0) && (file <= 8)) && ((rank > 0) && (rank <= 8))) {
-		this->str = this->_numberToLetter(file) + to_string(rank);
 		this->file = file;
 		this->rank = rank;
+		this->_updateString();
 
 		return;
 	}
@@ -57,9 +62,9 @@ void Position::set(string posStr) {
 		int rank = this->stringToFileAndRank(posStr).second;
 
 		if (((file > 0) && (file <= 8)) && ((rank > 0) && (rank <= 8))) {
-			this->str = posStr;
 			this->file = file;
 			this->rank = rank;
+			this->_updateString();
 
 			return;
 		}
@@ -69,9 +74,9 @@ void Position::set(string posStr) {
 
 void Position::set(int file, int rank) {
 	if (((file > 0) && (file <= 8)) && ((rank > 0) && (rank <= 8))) {
-		this->str = this->_numberToLetter(file) + to_string(rank);
 		this->file = file;
 		this->rank = rank;
+		this->_updateString();
 
 		return;
 	}
@@ -80,8 +85,9 @@ void Position::set(int file, int rank) {
 
 void Position::setFile(int file) {
 	if ((file > 0) && (file <= 8)) {
-		this->str = this->_numberToLetter(file) + this->rank;
 		this->file = file;
+		this->_updateString();
+
 		return;
 	}
 	throw exception("Invalid position!");
@@ -90,8 +96,9 @@ void Position::setFile(int file) {
 void Position::setFile(char file) {
 	int newFile = this->_letterToNumber(file);
 	if ((newFile > 0) && (newFile <= 8)) {
-		this->str = file + to_string(this->rank);
 		this->file = newFile;
+		this->_updateString();
+
 		return;
 	}
 	throw exception("Invalid position!");
@@ -99,8 +106,8 @@ void Position::setFile(char file) {
 
 void Position::setRank(int rank) {
 	if ((rank > 0) && (rank <= 8)) {
-		this->str = this->_numberToLetter(this->file) + to_string(rank);
 		this->rank = rank;
+		this->_updateString();
 
 		return;
 	}

@@ -10,6 +10,7 @@ private:
 	unsigned short rank;
 	static int _letterToNumber(char letter);
 	static char _numberToLetter(int number);
+	void _updateString();
 public:
 	static pair<int, int> stringToFileAndRank(string notation);
 
@@ -28,5 +29,6 @@ public:
 
 	int getFile();
 	int getRank();
+
 };
 
