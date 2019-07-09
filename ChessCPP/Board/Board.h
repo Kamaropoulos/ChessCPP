@@ -64,4 +64,6 @@ public:
 	 * @return Square* The Square for the passed file and rank
 	 */
 	Square* getSquare(string notation);
+
+	Square* getSquare(Position* pos);
 };

@@ -4,9 +4,9 @@
  * @brief The chess board, holding information for the squares and the pieces on them.
  * @version 0.1
  * @date 2019-07-06
- * 
+ *
  * @copyright Copyright (c) 2019
- * 
+ *
  */
 
 #include "Board.h"
@@ -106,7 +106,7 @@ Board::Board() {
 			// Switch the current color
 			currentColor = (Color)!currentColor;
 		}
-		
+
 		// We reached the end of the line.
 		// The next line will have to oposite starting color so we have to switch it.
 		startWithColor = (Color)!startWithColor;
@@ -135,4 +135,8 @@ Square* Board::getSquare(string notation) {
 
 	// If the passed string was invalid, return nullptr.
 	return nullptr;
+}
+
+Square* Board::getSquare(Position* pos) {
+	return squares[pos->getFile()][pos->getRank];
 }
