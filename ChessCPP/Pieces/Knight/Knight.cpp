@@ -11,7 +11,7 @@
 
 #include "Knight.h"
 
-Knight::Knight(Color color) : Piece(color) {
+Knight::Knight(Position* pos, Color color) : Piece(pos, color) {
 }
 
 vector<Move*> Knight::getAvailableMoves(Board* board) {

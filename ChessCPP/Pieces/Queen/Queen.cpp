@@ -11,7 +11,7 @@
 
 #include "Queen.h"
 
-Queen::Queen(Color color) : Piece(color) {
+Queen::Queen(Position* pos, Color color) : Piece(pos, color) {
 }
 
 vector<Move*> Queen::getAvailableMoves(Board* board) {

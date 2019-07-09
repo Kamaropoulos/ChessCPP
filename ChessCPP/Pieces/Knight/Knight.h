@@ -14,7 +14,7 @@
 class Knight :
 	public Piece {
 public:
-	Knight(Color color);
+	Knight(Position* pos, Color color);
 	string pieceName() { return "Knight"; }
 	vector<Move*> getAvailableMoves(Board* board);
 };

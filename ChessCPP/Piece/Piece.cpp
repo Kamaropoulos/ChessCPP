@@ -11,14 +11,18 @@
 
 #include "Piece.h"
 
-Piece::Piece(string position, Color color) {
-	this->position = position;
+Piece::Piece(Position* pos, Color color) {
+	this->position = pos;
 	this->color = color;
 	this->moved = false;
 }
 
-string Piece::getPosition() {
+Position* Piece::getPosition() {
 	return this->position;
+}
+
+Color Piece::getColor() {
+	return this->color;
 }
 
 bool Piece::hasMoved() {

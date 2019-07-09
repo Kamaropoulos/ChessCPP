@@ -11,7 +11,7 @@
 
 #include "Bishop.h"
 
-Bishop::Bishop(Color color) : Piece(color) {
+Bishop::Bishop(Position* pos, Color color) : Piece(pos, color) {
 }
 
 vector<Move*> Bishop::getAvailableMoves(Board* board) {

@@ -14,7 +14,7 @@
 class King :
 	public Piece {
 public:
-	King(Color color);
+	King(Position* pos, Color color);
 	string pieceName() { return "King"; }
 	vector<Move*> getAvailableMoves(Board* board);
 };

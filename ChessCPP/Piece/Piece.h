@@ -17,6 +17,7 @@ class Board; // Forward declare Board
 #include <string>
 #include <iostream>
 #include <vector>
+#include "../Position/Position.h"
 
 using namespace std;
 
@@ -25,11 +26,12 @@ enum Color { WHITE, BLACK };
 class Piece {
 protected:
 	bool moved;
-	string position;
+	 Position* position;
 	Color color;
 public:
-	Piece(string position, Color color);
-	string getPosition();
+	Piece(Position* pos, Color color);
+	Position* getPosition();
+	Color getColor();
 	bool hasMoved();
 	virtual string pieceName() = 0;
 	virtual vector<Move*> getAvailableMoves(Board* board) = 0;

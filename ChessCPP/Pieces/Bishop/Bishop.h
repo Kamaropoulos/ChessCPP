@@ -14,7 +14,7 @@
 class Bishop :
 	public Piece {
 public:
-	Bishop(Color color);
+	Bishop(Position* pos, Color color);
 	string pieceName() { return "Bishop"; }
 	vector<Move*> getAvailableMoves(Board* board);
 };

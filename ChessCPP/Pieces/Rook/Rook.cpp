@@ -11,10 +11,10 @@
 
 #include "Rook.h"
 
-Rook::Rook(Color color) : Piece(color) {
+Rook::Rook(Position* pos, Color color) : Piece(pos, color) {
 }
 
 vector<Move*> Rook::getAvailableMoves(Board* board) {
-	cout << "getAvalableMoves for " << this->pieceName() << endl;
+	cout << "getAvalableMoves for " << this->pieceName() << " at " << this->getPosition()->toString() << endl;
 	return vector<Move*>();
 }

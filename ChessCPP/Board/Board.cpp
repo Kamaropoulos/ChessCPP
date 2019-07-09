@@ -40,34 +40,34 @@ void Board::_createPieces() {
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };
 
 	// Create and attach white back pieces
-	this->getSquare("a1")->placePiece(new Rook(WHITE));
-	this->getSquare("b1")->placePiece(new Knight(WHITE));
-	this->getSquare("c1")->placePiece(new Bishop(WHITE));
-	this->getSquare("d1")->placePiece(new Queen(WHITE));
-	this->getSquare("e1")->placePiece(new King(WHITE));
-	this->getSquare("f1")->placePiece(new Bishop(WHITE));
-	this->getSquare("g1")->placePiece(new Knight(WHITE));
-	this->getSquare("h1")->placePiece(new Rook(WHITE));
+	this->getSquare("a1")->placePiece(new Rook(new Position("a1"), WHITE));
+	this->getSquare("b1")->placePiece(new Knight(new Position("b1"), WHITE));
+	this->getSquare("c1")->placePiece(new Bishop(new Position("c1"), WHITE));
+	this->getSquare("d1")->placePiece(new Queen(new Position("d1"), WHITE));
+	this->getSquare("e1")->placePiece(new King(new Position("e1"), WHITE));
+	this->getSquare("f1")->placePiece(new Bishop(new Position("f1"), WHITE));
+	this->getSquare("g1")->placePiece(new Knight(new Position("g1"), WHITE));
+	this->getSquare("h1")->placePiece(new Rook(new Position("h1"), WHITE));
 
 	// Create and attach white pawns
 	for (int i = 1; i <= 8; i++) {
 		cout << files[i] + "2" << endl;
-		this->getSquare(files[i] + "2")->placePiece(new Pawn(WHITE));
+		this->getSquare(files[i] + "2")->placePiece(new Pawn(new Position(files[i] + "2"), WHITE));
 	}
 
 	// Create and attach black back pieces
-	this->getSquare("a8")->placePiece(new Rook(BLACK));
-	this->getSquare("b8")->placePiece(new Knight(BLACK));
-	this->getSquare("c8")->placePiece(new Bishop(BLACK));
-	this->getSquare("d8")->placePiece(new King(BLACK));
-	this->getSquare("e8")->placePiece(new Queen(BLACK));
-	this->getSquare("f8")->placePiece(new Bishop(BLACK));
-	this->getSquare("g8")->placePiece(new Knight(BLACK));
-	this->getSquare("h8")->placePiece(new Rook(BLACK));
+	this->getSquare("a8")->placePiece(new Rook(new Position("a8"), BLACK));
+	this->getSquare("b8")->placePiece(new Knight(new Position("b8"), BLACK));
+	this->getSquare("c8")->placePiece(new Bishop(new Position("c8"), BLACK));
+	this->getSquare("d8")->placePiece(new King(new Position("d8"), BLACK));
+	this->getSquare("e8")->placePiece(new Queen(new Position("e8"), BLACK));
+	this->getSquare("f8")->placePiece(new Bishop(new Position("f8"), BLACK));
+	this->getSquare("g8")->placePiece(new Knight(new Position("g8"), BLACK));
+	this->getSquare("h8")->placePiece(new Rook(new Position("h8"), BLACK));
 
 	// Create and attach black pawns
 	for (int i = 1; i <= 8; i++) {
-		this->getSquare(files[i] + "7")->placePiece(new Pawn(BLACK));
+		this->getSquare(files[i] + "7")->placePiece(new Pawn(new Position(files[i] + "7"), BLACK));
 	}
 
 }

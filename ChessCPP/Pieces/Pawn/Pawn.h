@@ -14,7 +14,7 @@
 class Pawn :
 	public Piece {
 public:
-	Pawn(Color color);
+	Pawn(Position* pos, Color color);
 	string pieceName() { return "Pawn"; }
 	vector<Move*> getAvailableMoves(Board* board);
 };
