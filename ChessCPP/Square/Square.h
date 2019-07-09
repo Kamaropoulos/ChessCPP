@@ -14,8 +14,8 @@
 class Square {
 private:
 	Piece* piece = nullptr;
-public:
 	Color color;
+public:
 	Square(Color color);
 	void placePiece(Piece* piece);
 	bool hasPiece();
