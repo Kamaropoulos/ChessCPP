@@ -25,5 +25,8 @@ public:
 	void setFile(char file);
 
 	void setRank(int rank);
+
+	int getFile();
+	int getRank();
 };
 

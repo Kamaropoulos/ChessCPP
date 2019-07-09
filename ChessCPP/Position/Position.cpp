@@ -1,5 +1,4 @@
 #include "Position.h"
-#include <iostream>
 
 int Position::_letterToNumber(char letter) {
 	// Add 1 to start from 1 instead of 0
@@ -106,4 +105,12 @@ void Position::setRank(int rank) {
 		return;
 	}
 	throw exception("Invalid position!");
+}
+
+int Position::getFile() {
+	return this->file;
+}
+
+int Position::getRank() {
+	return this->rank;
 }
