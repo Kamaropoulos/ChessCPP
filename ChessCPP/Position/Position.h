@@ -30,5 +30,13 @@ public:
 	int getFile();
 	int getRank();
 
+	void gotoLeft();
+	void gotoRight();
+	void gotoTop();
+	void gotoBottom();
+	void gotoTopLeft();
+	void gotoTopRight();
+	void gotoBottomLeft();
+	void gotoBottomRight();
 };
 

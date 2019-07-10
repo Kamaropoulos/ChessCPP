@@ -121,3 +121,39 @@ int Position::getFile() {
 int Position::getRank() {
 	return this->rank;
 }
+
+void Position::gotoLeft() {
+	this->setFile(this->file - 1);
+}
+
+void Position::gotoRight() {
+	this->setFile(this->file + 1);
+}
+
+void Position::gotoTop() {
+	this->setRank(this->rank + 1);
+}
+
+void Position::gotoBottom() {
+	this->setFile(this->file - 1);
+}
+
+void Position::gotoTopLeft() {
+	this->setFile(this->file - 1);
+	this->setRank(this->rank + 1);
+}
+
+void Position::gotoTopRight() {
+	this->setFile(this->file + 1);
+	this->setRank(this->rank + 1);
+}
+
+void Position::gotoBottomLeft() {
+	this->setFile(this->file - 1);
+	this->setRank(this->rank - 1);
+}
+
+void Position::gotoBottomRight() {
+	this->setFile(this->file - 1);
+	this->setRank(this->rank + 1);
+}
