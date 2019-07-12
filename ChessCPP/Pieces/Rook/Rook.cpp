@@ -14,7 +14,7 @@
 Rook::Rook(Position* pos, Color color) : Piece(pos, color) {
 }
 
-vector<Move*> Rook::getAvailableMoves(Board* board) {
+vector<Position*> Rook::getAvailableMoves(Board* board) {
 	cout << "getAvalableMoves for " << this->pieceName() << " at " << this->getPosition()->toString() << endl;
-	return vector<Move*>();
+	return vector<Position*>();
 }

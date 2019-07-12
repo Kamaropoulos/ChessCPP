@@ -16,6 +16,6 @@ class Rook :
 public:
 	Rook(Position* pos, Color color);
 	string pieceName() { return "Rook"; }
-	vector<Move*> getAvailableMoves(Board* board);
+	vector<Position*> getAvailableMoves(Board* board);
 };
 
