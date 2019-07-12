@@ -14,7 +14,7 @@
 Knight::Knight(Position* pos, Color color) : Piece(pos, color) {
 }
 
-vector<Move*> Knight::getAvailableMoves(Board* board) {
+vector<Position*> Knight::getAvailableMoves(Board* board) {
 	cout << "getAvalableMoves for " << this->pieceName() << endl;
-	return vector<Move*>();
+	return vector<Position*>();
 }

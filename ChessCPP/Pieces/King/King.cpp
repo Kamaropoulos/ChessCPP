@@ -14,7 +14,7 @@
 King::King(Position* pos, Color color) : Piece(pos, color) {
 }
 
-vector<Move*> King::getAvailableMoves(Board* board) {
+vector<Position*> King::getAvailableMoves(Board* board) {
 	cout << "getAvalableMoves for " << this->pieceName() << endl;
-	return vector<Move*>();
+	return vector<Position*>();
 }

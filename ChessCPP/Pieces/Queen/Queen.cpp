@@ -14,7 +14,7 @@
 Queen::Queen(Position* pos, Color color) : Piece(pos, color) {
 }
 
-vector<Move*> Queen::getAvailableMoves(Board* board) {
+vector<Position*> Queen::getAvailableMoves(Board* board) {
 	cout << "getAvalableMoves for " << this->pieceName() << endl;
-	return vector<Move*>();
+	return vector<Position*>();
 }

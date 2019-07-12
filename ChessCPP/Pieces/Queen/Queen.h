@@ -16,6 +16,6 @@ class Queen :
 public:
 	Queen(Position* pos, Color color);
 	string pieceName() { return "Queen"; }
-	vector<Move*> getAvailableMoves(Board* board);
+	vector<Position*> getAvailableMoves(Board* board);
 };
 

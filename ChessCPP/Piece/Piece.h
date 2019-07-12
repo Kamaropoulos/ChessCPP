@@ -9,6 +9,8 @@
  * 
  */
 
+#pragma once
+
 #include "../Move/Move.h"
 class Board; // Forward declare Board
 
@@ -34,5 +36,5 @@ public:
 	Color getColor();
 	bool hasMoved();
 	virtual string pieceName() = 0;
-	virtual vector<Move*> getAvailableMoves(Board* board) = 0;
+	virtual vector<Position*> getAvailableMoves(Board* board) = 0;
 };

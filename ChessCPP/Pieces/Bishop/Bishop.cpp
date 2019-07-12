@@ -14,7 +14,7 @@
 Bishop::Bishop(Position* pos, Color color) : Piece(pos, color) {
 }
 
-vector<Move*> Bishop::getAvailableMoves(Board* board) {
+vector<Position*> Bishop::getAvailableMoves(Board* board) {
 	cout << "getAvalableMoves for " << this->pieceName() << endl;
-	return vector<Move*>();
+	return vector<Position*>();
 }
