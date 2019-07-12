@@ -29,6 +29,9 @@ string Position::toString() {
 	return this->str;
 }
 
+Position::Position(Position* posObject) : Position(posObject->toString()) {
+}
+
 Position::Position(string posStr) {
 	if (posStr.length() == 2) {
 		int file = this->stringToFileAndRank(posStr).first;

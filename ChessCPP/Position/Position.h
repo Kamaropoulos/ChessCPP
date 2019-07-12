@@ -16,6 +16,7 @@ public:
 
 	string toString();
 
+	Position(Position* posObject);
 	Position(string posStr);
 	Position(int file, int rank);
 
