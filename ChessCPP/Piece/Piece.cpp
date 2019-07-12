@@ -10,6 +10,24 @@
  */
 
 #include "Piece.h"
+#include "../Board/Board.h"
+
+MoveCheckResult Piece::_checkMove(Position* posToCheck, Board* board) {
+	MoveCheckResult result = CANT_MOVE;
+	// If square is empty
+	if (!board->getSquare(posToCheck)->hasPiece()) {
+		result = CAN_MOVE;
+	}
+
+	// if there is a piece in that square
+	if (board->getSquare(posToCheck)->hasPiece()) {
+		// and if this piece is not the same color
+		if (board->getSquare(posToCheck)->getColor() != this->getColor()) {
+			result = CAN_TAKE;
+		}
+	}
+	return result;
+}
 
 Piece::Piece(Position* pos, Color color) {
 	this->position = pos;
