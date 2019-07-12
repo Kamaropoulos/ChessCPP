@@ -138,5 +138,5 @@ Square* Board::getSquare(string notation) {
 }
 
 Square* Board::getSquare(Position* pos) {
-	return squares[pos->getFile()][pos->getRank];
+	return squares[pos->getFile()][pos->getRank()];
 }
