@@ -57,6 +57,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Position\Position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files\Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Move\Move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Position\Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

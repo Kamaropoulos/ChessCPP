@@ -4,18 +4,20 @@
  * @brief High-level game overview and management.
  * @version 0.1
  * @date 2019-07-06
- * 
+ *
  * @copyright Copyright (c) 2019
- * 
+ *
  */
 
 #include "Game.h"
 
-/**
- * @brief Construct a new Game:: Game object
- * 
- * It creates a new board and the pieces for the two players.
- */
+#include "../Position/Position.h"
+
+ /**
+  * @brief Construct a new Game:: Game object
+  *
+  * It creates a new board and the pieces for the two players.
+  */
 Game::Game() {
 	this->board = new Board();
 
@@ -25,7 +27,7 @@ Game::Game() {
 			Square* sq = this->board->getSquare(files[file] + to_string(rank));
 			if (sq != nullptr) {
 				if (this->board->getSquare(files[file] + to_string(rank))->hasPiece()) {
-					cout << "Square " << files[file] << to_string(rank) << " is " << ((this->board->getSquare(files[file] + to_string(rank))->getColor() == BLACK) ? "black" : "white") << " and holds a " << ((this->board->getSquare(files[file] + to_string(rank))->getPiece()->color == BLACK) ? "black " : "white ") << this->board->getSquare(files[file] + to_string(rank))->getPiece()->pieceName() << endl;
+					cout << "Square " << files[file] << to_string(rank) << " is " << ((this->board->getSquare(files[file] + to_string(rank))->getColor() == BLACK) ? "black" : "white") << " and holds a " << ((this->board->getSquare(files[file] + to_string(rank))->getPiece()->getColor() == BLACK) ? "black " : "white ") << this->board->getSquare(files[file] + to_string(rank))->getPiece()->pieceName() << endl;
 				}
 				else {
 					cout << "Square " << files[file] << to_string(rank) << " is " << ((this->board->getSquare(files[file] + to_string(rank))->getColor() == BLACK) ? "black" : "white") << " and it's empty" << endl;
@@ -39,6 +41,8 @@ Game::Game() {
 
 	this->playerTurn = 1;
 
-	this->board->getSquare("a2")->getPiece()->getAvailableMoves();
-	this->board->getSquare("a1")->getPiece()->getAvailableMoves();
+	vector<Position*> moves = this->board->getSquare("b2")->getPiece()->getAvailableMoves(this->board);
+	for (int i = 0; i < moves.size(); i++) {
+		cout << moves[i]->toString() << endl;
+	}
 }
