@@ -11,11 +11,12 @@
 
 #pragma once
 #include "../../Piece/Piece.h"
+#include "../../Board/Board.h"
 class Pawn :
 	public Piece {
 public:
 	Pawn(Position* pos, Color color);
 	string pieceName() { return "Pawn"; }
-	vector<Move*> getAvailableMoves(Board* board);
+	vector<Position*> getAvailableMoves(Board* board);
 };
 
