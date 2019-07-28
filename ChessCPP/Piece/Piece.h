@@ -36,8 +36,10 @@ protected:
 public:
 	Piece(Position* pos, Color color, int value);
 	Position* getPosition();
+	void setPosition(Position* pos);
 	Color getColor();
 	bool hasMoved();
+	void setMoved();
 	int getValue();
 	virtual string pieceName() = 0;
 	virtual vector<Position*> getAvailableMoves(Board* board) = 0;

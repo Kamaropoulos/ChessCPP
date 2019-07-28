@@ -22,7 +22,7 @@ MoveCheckResult Piece::_checkMove(Position* posToCheck, Board* board) {
 	// if there is a piece in that square
 	if (board->getSquare(posToCheck)->hasPiece()) {
 		// and if this piece is not the same color
-		if (board->getSquare(posToCheck)->getColor() != this->getColor()) {
+		if (board->getSquare(posToCheck)->getPiece()->getColor() != this->getColor()) {
 			result = CAN_TAKE;
 		}
 	}
@@ -40,12 +40,20 @@ Position* Piece::getPosition() {
 	return this->position;
 }
 
+void Piece::setPosition(Position* pos) {
+	this->position = pos;
+}
+
 Color Piece::getColor() {
 	return this->color;
 }
 
 bool Piece::hasMoved() {
 	return this->moved;
+}
+
+void Piece::setMoved() {
+	this->moved = true;
 }
 
 int Piece::getValue() {
