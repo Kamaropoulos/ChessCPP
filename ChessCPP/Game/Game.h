@@ -36,4 +36,5 @@ public:
 	Game();
 
 	bool movePiece(int player, string origin, string destination);
+	pair<int, int> getScore();
 };

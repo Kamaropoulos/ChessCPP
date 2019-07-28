@@ -36,9 +36,9 @@ void Game::_printStatus() {
 }
 
 void Game::_printBoard() {
-	cout << "    a b c d e f g h" << endl;
+	cout << "    a b c d e f g h " << endl;
 	cout << "   ________________" << endl;
-	for (int rank = 8; rank >=1; rank--) {
+	for (int rank = 8; rank >= 1; rank--) {
 		cout << rank << " | ";
 		for (int file = 1; file <= 8; file++) {
 			Position* currentPos = new Position(file, rank);
@@ -48,6 +48,7 @@ void Game::_printBoard() {
 				char representation = piece->pieceName()[0];
 				if (piece->getColor() == BLACK) representation = tolower(representation);
 				cout << representation << " ";
+				//cout << piece->getPosition()->toString() << " ";
 			}
 			else {
 				cout << "- ";
@@ -69,7 +70,7 @@ Game::Game() {
 	this->board = new Board();
 
 	// Create chess pieces and attach them to their starting squares
-	this->board->createPieces(); 
+	this->board->createPieces();
 
 	this->playerTurn = 1;
 
@@ -107,21 +108,21 @@ bool Game::movePiece(int player, string origin, string destination) {
 				// Action is available, move the piece
 				// If there's an enemy piece at the destination square
 				if (this->board->getSquare(destination)->hasPiece()) {
-					if (this->board->getSquare(destination)->getPiece()->getColor() != player) {
-						// Remove piece and give the points to the player that captured the piece
-						if (player == 1) {
-							this->scorePlayer1 += this->board->getSquare(destination)->getPiece()->getValue();
-						}
-						else {
-							this->scorePlayer2 += this->board->getSquare(destination)->getPiece()->getValue();
-						}
-						// Remove enemy piece
-						this->board->getSquare(destination)->emptySquare();
+					// Remove piece and give the points to the player that captured the piece
+					if (player == 1) {
+						this->scorePlayer1 += this->board->getSquare(destination)->getPiece()->getValue();
 					}
+					else {
+						this->scorePlayer2 += this->board->getSquare(destination)->getPiece()->getValue();
+					}
+					// Remove enemy piece
+					this->board->getSquare(destination)->emptySquare();
 				}
 				// Move piece to its destination
 				this->board->getSquare(destination)->placePiece(this->board->getSquare(origin)->getPiece());
 				this->board->getSquare(origin)->emptySquare();
+				this->board->getSquare(destination)->getPiece()->setPosition(new Position(destination));
+				this->board->getSquare(destination)->getPiece()->setMoved();
 
 				this->playerTurn = (playerTurn == 1) ? 2 : 1;
 
@@ -130,4 +131,8 @@ bool Game::movePiece(int player, string origin, string destination) {
 		}
 	}
 	return false;
+}
+
+pair<int, int> Game::getScore() {
+	return pair<int, int>(scorePlayer1, scorePlayer2);
 }
