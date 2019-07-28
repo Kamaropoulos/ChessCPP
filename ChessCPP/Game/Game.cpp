@@ -91,11 +91,14 @@ bool Game::movePiece(int player, string origin, string destination) {
 	// If there's a piece on the origin square
 	if (this->board->getSquare(origin)->hasPiece()) {
 		// and the piece belongs to the current player
-		if (this->board->getSquare(origin)->getColor() == player) {
+		if (this->board->getSquare(origin)->getPiece()->getColor() == ((player == 1) ? WHITE : BLACK)) {
 			// Get piece for easy access
 			Piece* piece = this->board->getSquare(origin)->getPiece();
 
 			vector<Position*> availableMoves = piece->getAvailableMoves(this->board);
+			for (int i = 0; i < availableMoves.size(); i++) {
+				cout << availableMoves[i]->toString() << endl;
+			}
 
 			// If attempted move exists in the available moves
 			auto it = find_if(availableMoves.begin(), availableMoves.end(), [&move](Position* obj) {return obj->toString() == move->getDestination()->toString(); });
