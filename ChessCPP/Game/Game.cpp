@@ -35,6 +35,30 @@ void Game::_printStatus() {
 	}
 }
 
+void Game::_printBoard() {
+	cout << "    a b c d e f g h" << endl;
+	cout << "   ________________" << endl;
+	for (int rank = 8; rank >=1; rank--) {
+		cout << rank << " | ";
+		for (int file = 1; file <= 8; file++) {
+			Position* currentPos = new Position(file, rank);
+			Square* square = this->board->getSquare(currentPos->toString());
+			if (square->hasPiece()) {
+				Piece* piece = square->getPiece();
+				char representation = piece->pieceName()[0];
+				if (piece->getColor() == BLACK) representation = tolower(representation);
+				cout << representation << " ";
+			}
+			else {
+				cout << "- ";
+			}
+		}
+		cout << "| " << rank << endl;
+	}
+	cout << "   ________________" << endl;
+	cout << "    a b c d e f g h" << endl;
+}
+
 /**
   * @brief Construct a new Game:: Game object
   *
@@ -45,9 +69,7 @@ Game::Game() {
 	this->board = new Board();
 
 	// Create chess pieces and attach them to their starting squares
-	this->board->createPieces();
-
-	this->_printStatus();
+	this->board->createPieces(); 
 
 	this->playerTurn = 1;
 
@@ -55,9 +77,6 @@ Game::Game() {
 	this->scorePlayer2 = 0;
 
 	vector<Position*> moves = this->board->getSquare("b2")->getPiece()->getAvailableMoves(this->board);
-	for (int i = 0; i < moves.size(); i++) {
-		cout << moves[i]->toString() << endl;
-	}
 
 	this->_printBoard();
 }
@@ -101,7 +120,9 @@ bool Game::movePiece(int player, string origin, string destination) {
 				this->board->getSquare(destination)->placePiece(this->board->getSquare(origin)->getPiece());
 				this->board->getSquare(origin)->emptySquare();
 
-				this->_printStatus();
+				this->playerTurn = (playerTurn == 1) ? 2 : 1;
+
+				this->_printBoard();
 			}
 		}
 	}

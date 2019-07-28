@@ -26,6 +26,7 @@ private:
 	int scorePlayer2;
 	unsigned char playerTurn;
 	void _printStatus();
+	void _printBoard();
 
 public:
 	/**
