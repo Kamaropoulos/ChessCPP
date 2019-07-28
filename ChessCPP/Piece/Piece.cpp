@@ -12,8 +12,8 @@
 #include "Piece.h"
 #include "../Board/Board.h"
 
-MoveCheckResult Piece::_checkMove(Position* posToCheck, Board* board) {
-	MoveCheckResult result = CANT_MOVE;
+MoveResult Piece::_checkMove(Position* posToCheck, Board* board) {
+	MoveResult result = CANT_MOVE;
 	// If square is empty
 	if (!board->getSquare(posToCheck)->hasPiece()) {
 		result = CAN_MOVE;
