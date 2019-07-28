@@ -31,3 +31,7 @@ Piece* Square::getPiece() {
 Color Square::getColor() {
 	return this->color;
 }
+
+void Square::emptySquare() {
+	this->piece = nullptr;
+}

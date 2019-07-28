@@ -21,4 +21,5 @@ public:
 	bool hasPiece();
 	Piece* getPiece();
 	Color getColor();
+	void emptySquare();
 };

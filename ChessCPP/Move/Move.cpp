@@ -10,3 +10,17 @@
  */
 
 #include "Move.h"
+
+Move::Move(int player, Position* origin, Position* destination) {
+	this->origin = origin;
+	this->destination = destination;
+	this->player = player;
+}
+
+Position* Move::getOrigin() {
+	return this->origin;
+}
+
+Position* Move::getDestination() {
+	return this->destination;
+}

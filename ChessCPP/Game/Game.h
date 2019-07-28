@@ -22,7 +22,10 @@ using namespace std;
 class Game {
 private:
 	Board* board;
+	int scorePlayer1;
+	int scorePlayer2;
 	unsigned char playerTurn;
+	void _printStatus();
 
 public:
 	/**
@@ -30,4 +33,6 @@ public:
 	 * 
 	 */
 	Game();
+
+	bool movePiece(int player, string origin, string destination);
 };

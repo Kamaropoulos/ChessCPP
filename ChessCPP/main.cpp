@@ -18,4 +18,5 @@
  */
 int main() {
 	Game* game = new Game();
+	game->movePiece(1, "b2", "b3");
 }

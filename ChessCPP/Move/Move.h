@@ -10,6 +10,18 @@
  */
 
 #pragma once
+
+#include "../Position/Position.h"
+
 class Move {
+private:
+	Position* origin;
+	Position* destination;
+	int player;
+
+public:
+	Move(int player, Position* origin, Position* destination);
+	Position* getOrigin();
+	Position* getDestination();
 };
 

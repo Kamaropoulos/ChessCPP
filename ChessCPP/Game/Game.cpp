@@ -11,16 +11,11 @@
 
 #include "Game.h"
 
+#include <algorithm>
+
 #include "../Position/Position.h"
 
- /**
-  * @brief Construct a new Game:: Game object
-  *
-  * It creates a new board and the pieces for the two players.
-  */
-Game::Game() {
-	this->board = new Board();
-
+void Game::_printStatus() {
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };
 	for (int rank = 1; rank <= 8; ++rank) {
 		for (int file = 1; file <= 8; ++file) {
@@ -38,11 +33,77 @@ Game::Game() {
 			}
 		}
 	}
+}
+
+/**
+  * @brief Construct a new Game:: Game object
+  *
+  * It creates a new board and the pieces for the two players.
+  */
+Game::Game() {
+	// Create a new board
+	this->board = new Board();
+
+	// Create chess pieces and attach them to their starting squares
+	this->board->createPieces();
+
+	this->_printStatus();
 
 	this->playerTurn = 1;
+
+	this->scorePlayer1 = 0;
+	this->scorePlayer2 = 0;
 
 	vector<Position*> moves = this->board->getSquare("b2")->getPiece()->getAvailableMoves(this->board);
 	for (int i = 0; i < moves.size(); i++) {
 		cout << moves[i]->toString() << endl;
 	}
+
+	this->_printBoard();
+}
+
+bool Game::movePiece(int player, string origin, string destination) {
+	// If it's not this player's turn, return false
+	if (this->playerTurn != player) return false;
+
+	// Create movement object
+	Move* move = new Move(player, new Position(origin), new Position(destination));
+
+	// If there's a piece on the origin square
+	if (this->board->getSquare(origin)->hasPiece()) {
+		// and the piece belongs to the current player
+		if (this->board->getSquare(origin)->getColor() == player) {
+			// Get piece for easy access
+			Piece* piece = this->board->getSquare(origin)->getPiece();
+
+			vector<Position*> availableMoves = piece->getAvailableMoves(this->board);
+
+			// If attempted move exists in the available moves
+			auto it = find_if(availableMoves.begin(), availableMoves.end(), [&move](Position* obj) {return obj->toString() == move->getDestination()->toString(); });
+
+			if (it != availableMoves.end()) {
+				// Action is available, move the piece
+				// If there's an enemy piece at the destination square
+				if (this->board->getSquare(destination)->hasPiece()) {
+					if (this->board->getSquare(destination)->getPiece()->getColor() != player) {
+						// Remove piece and give the points to the player that captured the piece
+						if (player == 1) {
+							this->scorePlayer1 += this->board->getSquare(destination)->getPiece()->getValue();
+						}
+						else {
+							this->scorePlayer2 += this->board->getSquare(destination)->getPiece()->getValue();
+						}
+						// Remove enemy piece
+						this->board->getSquare(destination)->emptySquare();
+					}
+				}
+				// Move piece to its destination
+				this->board->getSquare(destination)->placePiece(this->board->getSquare(origin)->getPiece());
+				this->board->getSquare(origin)->emptySquare();
+
+				this->_printStatus();
+			}
+		}
+	}
+	return false;
 }
