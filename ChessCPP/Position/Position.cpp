@@ -138,7 +138,7 @@ void Position::gotoTop() {
 }
 
 void Position::gotoBottom() {
-	this->setFile(this->file - 1);
+	this->setFile(this->rank - 1);
 }
 
 void Position::gotoTopLeft() {
@@ -157,6 +157,6 @@ void Position::gotoBottomLeft() {
 }
 
 void Position::gotoBottomRight() {
-	this->setFile(this->file - 1);
-	this->setRank(this->rank + 1);
+	this->setFile(this->rank - 1);
+	this->setRank(this->file + 1);
 }
