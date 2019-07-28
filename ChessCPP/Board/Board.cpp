@@ -34,7 +34,7 @@ pair<int, int> Board::_notationToFileAndRank(string notation) {
 	return pair<int, int>(file, rank);
 }
 
-void Board::_createPieces() {
+void Board::createPieces() {
 	// Array to hold file characters
 	// First one was left empty to use base-1 instead of base-0 for the first element
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };
@@ -51,7 +51,6 @@ void Board::_createPieces() {
 
 	// Create and attach white pawns
 	for (int i = 1; i <= 8; i++) {
-		cout << files[i] + "2" << endl;
 		this->getSquare(files[i] + "2")->placePiece(new Pawn(new Position(files[i] + "2"), WHITE));
 	}
 
@@ -111,9 +110,6 @@ Board::Board() {
 		// The next line will have to oposite starting color so we have to switch it.
 		startWithColor = (Color)!startWithColor;
 	}
-
-	// Create chess pieces and attach them to their starting squares
-	this->_createPieces();
 }
 
 Square* Board::getSquare(string notation) {
