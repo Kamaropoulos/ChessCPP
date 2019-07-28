@@ -24,3 +24,19 @@ Position* Move::getOrigin() {
 Position* Move::getDestination() {
 	return this->destination;
 }
+
+void Move::setResult(MoveResult result) {
+	this->result = result;
+}
+
+void Move::setTakenPiece(Piece* takenPiece) {
+	this->takenPiece = takenPiece;
+}
+
+MoveResult Move::getResult() {
+	return this->result;
+}
+
+Piece* Move::getTakenPiece() {
+	return this->takenPiece;
+}
