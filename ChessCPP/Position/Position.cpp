@@ -138,7 +138,7 @@ void Position::gotoTop() {
 }
 
 void Position::gotoBottom() {
-	this->setFile(this->rank - 1);
+	this->setRank(this->rank - 1);
 }
 
 void Position::gotoTopLeft() {
