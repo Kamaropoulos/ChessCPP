@@ -11,7 +11,7 @@
 
 #include "King.h"
 
-King::King(Position* pos, Color color) : Piece(pos, color) {
+King::King(Position* pos, Color color) : Piece(pos, color, 0) {
 }
 
 vector<Position*> King::getAvailableMoves(Board* board) {

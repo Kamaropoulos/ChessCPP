@@ -29,10 +29,11 @@ MoveCheckResult Piece::_checkMove(Position* posToCheck, Board* board) {
 	return result;
 }
 
-Piece::Piece(Position* pos, Color color) {
+Piece::Piece(Position* pos, Color color, int value) {
 	this->position = pos;
 	this->color = color;
 	this->moved = false;
+	this->value = value;
 }
 
 Position* Piece::getPosition() {
@@ -45,4 +46,8 @@ Color Piece::getColor() {
 
 bool Piece::hasMoved() {
 	return this->moved;
+}
+
+int Piece::getValue() {
+	return this->value;
 }

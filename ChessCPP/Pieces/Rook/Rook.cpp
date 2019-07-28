@@ -11,7 +11,7 @@
 
 #include "Rook.h"
 
-Rook::Rook(Position* pos, Color color) : Piece(pos, color) {
+Rook::Rook(Position* pos, Color color) : Piece(pos, color, 5) {
 }
 
 vector<Position*> Rook::getAvailableMoves(Board* board) {

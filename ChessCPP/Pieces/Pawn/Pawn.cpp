@@ -11,7 +11,7 @@
 
 #include "Pawn.h"
 
-Pawn::Pawn(Position* pos, Color color) : Piece(pos, color) {
+Pawn::Pawn(Position* pos, Color color) : Piece(pos, color, 1) {
 }
 
 vector<Position*> Pawn::getAvailableMoves(Board* board) {

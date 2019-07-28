@@ -29,14 +29,16 @@ enum MoveCheckResult { CANT_MOVE, CAN_MOVE, CAN_TAKE };
 class Piece {
 protected:
 	bool moved;
-	 Position* position;
+	Position* position;
 	Color color;
+	int value;
 	MoveCheckResult _checkMove(Position* posToCheck, Board* board);
 public:
-	Piece(Position* pos, Color color);
+	Piece(Position* pos, Color color, int value);
 	Position* getPosition();
 	Color getColor();
 	bool hasMoved();
+	int getValue();
 	virtual string pieceName() = 0;
 	virtual vector<Position*> getAvailableMoves(Board* board) = 0;
 };
