@@ -26,21 +26,10 @@ vector<Position*> Pawn::getAvailableMoves(Board* board) {
 
 	// if Piece is white, we move upwards in ranks
 	if (this->getColor() == WHITE) {
-		// Check one forward
-		posToCheck->gotoTop();
-		// If piece can move to square (move or take)
-		MoveCheckResult res = this->_checkMove(posToCheck, board);
-		if ((res != CANT_MOVE)) {
-			// Push as available move
-			availableMoves.push_back(new Position(posToCheck));
-		}
-		// Reset posToCheck
-		posToCheck->set(this->getPosition()->toString());
-
-		// Check if it can move two forward
-		if (!this->hasMoved()) {
+		try {
+			// Check one forward
+			posToCheck->gotoTop();
 			// If piece can move to square (move or take)
-			posToCheck->setRank(posToCheck->getRank() + 2);
 			MoveCheckResult res = this->_checkMove(posToCheck, board);
 			if ((res != CANT_MOVE)) {
 				// Push as available move
@@ -48,31 +37,108 @@ vector<Position*> Pawn::getAvailableMoves(Board* board) {
 			}
 			// Reset posToCheck
 			posToCheck->set(this->getPosition()->toString());
+		} catch (...) {}
+		
+		// Check if it can move two forward
+		if (!this->hasMoved()) {
+			try {
+				// If piece can move to square (move or take)
+				posToCheck->setRank(posToCheck->getRank() + 2);
+				MoveCheckResult res = this->_checkMove(posToCheck, board);
+				if ((res != CANT_MOVE)) {
+					// Push as available move
+					availableMoves.push_back(new Position(posToCheck));
+				}
+				// Reset posToCheck
+				posToCheck->set(this->getPosition()->toString());
+			} catch(...) {}
 		}
 
 		// Check take positions
 
-		// Top left
-		posToCheck->gotoTopLeft();
-		// If piece can move to square (move or take)
-		res = this->_checkMove(posToCheck, board);
-		if ((res == CAN_TAKE)) {
-			// Push as available move
-			availableMoves.push_back(new Position(posToCheck));
-		}
-		// Reset posToCheck
-		posToCheck->set(this->getPosition()->toString());
+		try {
+			// Top left
+			posToCheck->gotoTopLeft();
+			// If piece can move to square (move or take)
+			MoveCheckResult res = this->_checkMove(posToCheck, board);
+			if ((res == CAN_TAKE)) {
+				// Push as available move
+				availableMoves.push_back(new Position(posToCheck));
+			}
+			// Reset posToCheck
+			posToCheck->set(this->getPosition()->toString());
+		} catch(...) {}
 
-		// Top right
-		posToCheck->gotoTopRight();
-		// If piece can move to square (move or take)
-		res = this->_checkMove(posToCheck, board);
-		if ((res == CAN_TAKE)) {
-			// Push as available move
-			availableMoves.push_back(new Position(posToCheck));
+		try {
+			// Top right
+			posToCheck->gotoTopRight();
+			// If piece can move to square (move or take)
+			MoveCheckResult res = this->_checkMove(posToCheck, board);
+			if ((res == CAN_TAKE)) {
+				// Push as available move
+				availableMoves.push_back(new Position(posToCheck));
+			}
+			// Reset posToCheck
+			posToCheck->set(this->getPosition()->toString());
+		} catch (...) {}
+	}
+	else {
+		// else, if it's black, we move downwards in ranks
+		try {
+			// Check one forward
+			posToCheck->gotoBottom();
+			// If piece can move to square (move or take)
+			MoveCheckResult res = this->_checkMove(posToCheck, board);
+			if ((res != CANT_MOVE)) {
+				// Push as available move
+				availableMoves.push_back(new Position(posToCheck));
+			}
+			// Reset posToCheck
+			posToCheck->set(this->getPosition()->toString());
+		} catch (...) {}
+
+		// Check if it can move two forward
+		if (!this->hasMoved()) {
+			try {
+				// If piece can move to square (move or take)
+				posToCheck->setRank(posToCheck->getRank() - 2);
+				MoveCheckResult res = this->_checkMove(posToCheck, board);
+				if ((res != CANT_MOVE)) {
+					// Push as available move
+					availableMoves.push_back(new Position(posToCheck));
+				}
+				// Reset posToCheck
+				posToCheck->set(this->getPosition()->toString());
+			} catch (...) {}
 		}
-		// Reset posToCheck
-		posToCheck->set(this->getPosition()->toString());
+
+		// Check take positions
+
+		try {
+			// Forward left
+			posToCheck->gotoBottomLeft();
+			// If piece can move to square (move or take)
+			MoveCheckResult res = this->_checkMove(posToCheck, board);
+			if ((res == CAN_TAKE)) {
+				// Push as available move
+				availableMoves.push_back(new Position(posToCheck));
+			}
+			// Reset posToCheck
+			posToCheck->set(this->getPosition()->toString());
+		} catch (...) {}
+
+		try {
+			// Forward right
+			posToCheck->gotoBottomRight();
+			// If piece can move to square (move or take)
+			MoveCheckResult res = this->_checkMove(posToCheck, board);
+			if ((res == CAN_TAKE)) {
+				// Push as available move
+				availableMoves.push_back(new Position(posToCheck));
+			}
+			// Reset posToCheck
+			posToCheck->set(this->getPosition()->toString());
+		} catch (...) {}
 	}
 
 	return availableMoves;
