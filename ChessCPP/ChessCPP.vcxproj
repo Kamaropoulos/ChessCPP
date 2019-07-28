@@ -136,6 +136,7 @@
     <ClCompile Include="Piece\Piece.cpp" />
     <ClCompile Include="Position\Position.cpp" />
     <ClCompile Include="Square\Square.cpp" />
+    <ClCompile Include="TimeMachine\TimeMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board\Board.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Piece\Piece.h" />
     <ClInclude Include="Position\Position.h" />
     <ClInclude Include="Square\Square.h" />
+    <ClInclude Include="TimeMachine\TimeMachine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
