@@ -37,4 +37,5 @@ public:
 
 	bool movePiece(int player, string origin, string destination);
 	pair<int, int> getScore();
+	vector<Position*> getAvailableMoves(Position* pos);
 };

@@ -32,4 +32,9 @@ int main() {
 	game->movePiece(2, "a7", "a6");
 	game->movePiece(1, "f3", "g4");
 	cout << game->getScore().first << " - " << game->getScore().second << endl;
+
+	auto movesA = game->getAvailableMoves(new Position("h2"));
+	for (auto move : movesA) {
+		cout << "move for h2: " << move->toString() << endl;
+	}
 }

@@ -136,3 +136,12 @@ bool Game::movePiece(int player, string origin, string destination) {
 pair<int, int> Game::getScore() {
 	return pair<int, int>(scorePlayer1, scorePlayer2);
 }
+
+vector<Position*> Game::getAvailableMoves(Position* pos) {
+
+	// If square is empty, return empty vector
+	if (!this->board->getSquare(pos)->hasPiece()) {
+		return vector<Position*>();
+	}
+	return this->board->getSquare(pos)->getPiece()->getAvailableMoves(this->board);
+}
