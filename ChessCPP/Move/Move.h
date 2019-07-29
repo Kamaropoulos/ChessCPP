@@ -19,7 +19,7 @@ private:
 	Position* origin;
 	Position* destination;
 	int player;
-	MoveResult result;
+	MoveResult result = CANT_MOVE;
 	Piece* takenPiece = nullptr;
 
 public:

@@ -14,6 +14,7 @@
 #include <algorithm>
 
 #include "../Position/Position.h"
+#include "../Move/Move.h"
 
 void Game::_printStatus() {
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };

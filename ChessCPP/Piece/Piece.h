@@ -11,7 +11,6 @@
 
 #pragma once
 
-#include "../Move/Move.h"
 class Board; // Forward declare Board
 
 #pragma once

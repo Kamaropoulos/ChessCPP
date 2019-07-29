@@ -1,6 +1,7 @@
 #pragma once
 #include <stack>
 #include "../Board/Board.h"
+#include "../Move/Move.h"
 class TimeMachine {
 private:
 	stack<Move*> back;
