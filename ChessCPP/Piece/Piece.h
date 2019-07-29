@@ -23,7 +23,7 @@ class Board; // Forward declare Board
 using namespace std;
 
 enum Color { WHITE, BLACK };
-enum MoveResult { CANT_MOVE, CAN_MOVE, CAN_TAKE };
+enum MoveCheckResult { CANT_MOVE, CAN_MOVE, CAN_TAKE };
 
 class Piece {
 protected:
@@ -31,7 +31,7 @@ protected:
 	Position* position;
 	Color color;
 	int value;
-	MoveResult _checkMove(Position* posToCheck, Board* board);
+	MoveCheckResult _checkMove(Position* posToCheck, Board* board);
 public:
 	Piece(Position* pos, Color color, int value);
 	Position* getPosition();

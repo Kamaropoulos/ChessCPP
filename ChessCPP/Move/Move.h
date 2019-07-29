@@ -14,12 +14,14 @@
 #include "../Position/Position.h"
 #include "../Piece/Piece.h"
 
+enum MoveResult { MOVE, TAKE, PROMOTION };
+
 class Move {
 private:
 	Position* origin;
 	Position* destination;
 	int player;
-	MoveResult result = CANT_MOVE;
+	MoveResult result;
 	Piece* takenPiece = nullptr;
 
 public:
