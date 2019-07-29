@@ -117,15 +117,23 @@ bool Game::movePiece(int player, string origin, string destination) {
 						this->scorePlayer2 += this->board->getSquare(destination)->getPiece()->getValue();
 					}
 					// Remove enemy piece
+					move->setTakenPiece(this->board->getSquare(destination)->getPiece());
+					move->setResult(TAKE);
 					this->board->getSquare(destination)->emptySquare();
+				}
+				else {
+					move->setResult(MOVE);
 				}
 				// Move piece to its destination
 				this->board->getSquare(destination)->placePiece(this->board->getSquare(origin)->getPiece());
+
 				this->board->getSquare(origin)->emptySquare();
 				this->board->getSquare(destination)->getPiece()->setPosition(new Position(destination));
 				this->board->getSquare(destination)->getPiece()->setMoved();
 
 				this->playerTurn = (playerTurn == 1) ? 2 : 1;
+
+				this->tm.addMove(move);
 
 				this->_printBoard();
 			}

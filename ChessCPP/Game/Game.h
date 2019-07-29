@@ -12,6 +12,7 @@
 #pragma once
 #include <string>
 #include "../Board/Board.h"
+#include "../TimeMachine/TimeMachine.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ using namespace std;
 class Game {
 private:
 	Board* board;
+	TimeMachine tm;
 	int scorePlayer1;
 	int scorePlayer2;
 	unsigned char playerTurn;
