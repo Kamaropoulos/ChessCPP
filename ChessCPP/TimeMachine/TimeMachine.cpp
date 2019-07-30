@@ -24,6 +24,25 @@ bool TimeMachine::goBackwards() {
 	return true;
 }
 
+bool TimeMachine::goForwards() {
+	if (this->isTimeTravelling) {
+		// Apply top of forward stack and pop it into the back stack
+		auto move = this->forward.top();
+		this->game->movePiece(move->getPlayer(), move->getOrigin()->toString(), move->getDestination()->toString(), false);
+		
+		// Push move into back stack
+		this->back.push(move);
+		this->forward.pop();
+
+		// Update isTimeTravelling flag if forward stack is empty
+		if (this->forward.empty())
+			this->isTimeTravelling = false;
+
+		return true;
+	}
+	return false;
+}
+
 bool TimeMachine::resume() {
 	if (!this->isTimeTravelling && this->forward.empty()) {
 		return true;
@@ -36,10 +55,11 @@ bool TimeMachine::resume() {
 
 	if (!this->forward.empty()) {
 		while (!this->forward.empty()) {
-			this->back.push(this->forward.top());
-			this->forward.pop();
+			this->goForwards();
 		}
+		return true;
 	}
+	return false;
 }
 
 void TimeMachine::addMove(Move* move) {

@@ -32,7 +32,12 @@ int main() {
 				game->goBack();
 			}
 			else {
-				move = game->movePiece(game->getPlayer(), from, to);
+				if ((from == "go") && (to == "forward")) {
+					game->goForward();
+				}
+				else {
+					move = game->movePiece(game->getPlayer(), from, to);
+				}
 			}
 		} while (!move);
 		

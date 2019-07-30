@@ -113,6 +113,7 @@ bool Game::movePiece(int player, string origin, string destination, bool addToTi
 			// Get piece for easy access
 			Piece* piece = this->board->getSquare(origin)->getPiece();
 
+			// Get available moves for origin piece
 			vector<Position*> availableMoves = piece->getAvailableMoves(this->board);
 
 			// If attempted move exists in the available moves
@@ -177,6 +178,12 @@ int Game::getPlayer() {
 
 bool Game::goBack() {
 	bool res = this->tm->goBackwards();
+	this->_printBoard();
+	return res;
+}
+
+bool Game::goForward() {
+	bool res = this->tm->goForwards();
 	this->_printBoard();
 	return res;
 }
