@@ -136,3 +136,44 @@ Square* Board::getSquare(string notation) {
 Square* Board::getSquare(Position* pos) {
 	return this->getSquare(pos->toString());
 }
+
+void Board::reset() {
+	// Initialize 2d array to hold Squares
+	this->squares = new Square * *[8];
+
+	// Initialize the second level arrays of the 2d array
+	for (int file = 0; file < 8; ++file) {
+		this->squares[file] = new Square * [8];
+	}
+
+	// We are going to start with the bottom left square (a1)
+	// Then we'll move files to the left and once we reach the end of the line
+	// we'll move to the above rank, starting again from the first file.
+
+	// The color of the first square is black
+	Color startWithColor = BLACK;
+
+	// Each line's first square's color is the oposite of the previous one.
+	// So we'll be switching color every time we reach the end of the line.
+
+	// For each rank in the board:
+	for (int rank = 0; rank < 8; ++rank) {
+		// Set the color for the current square the starting
+		// color since we are at the beginning of the line.
+		Color currentColor = startWithColor;
+
+		// For each file of the current rank:
+		for (int file = 0; file < 8; ++file) {
+			// Create a new Square using the current color and store it on the 
+			// correct position of the squares array based on it's file and rank.
+			this->squares[file][rank] = new Square(currentColor);
+
+			// Switch the current color
+			currentColor = (Color)!currentColor;
+		}
+
+		// We reached the end of the line.
+		// The next line will have to oposite starting color so we have to switch it.
+		startWithColor = (Color)!startWithColor;
+	}
+}

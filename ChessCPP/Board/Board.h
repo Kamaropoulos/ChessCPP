@@ -66,4 +66,6 @@ public:
 	Square* getSquare(string notation);
 
 	Square* getSquare(Position* pos);
+
+	void reset();
 };
