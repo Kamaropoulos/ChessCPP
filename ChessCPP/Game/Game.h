@@ -32,15 +32,17 @@ private:
 	void _printBoard();
 
 public:
+	void reset();
 	/**
 	 * @brief Construct a new Game object
 	 * 
 	 */
 	Game();
 
-	bool movePiece(int player, string origin, string destination);
+	bool movePiece(int player, string origin, string destination, bool addToTimeMachine = true);
 	pair<int, int> getScore();
 	vector<Position*> getAvailableMoves(Position* pos);
+	int getPlayer();
 
 	bool goBack();
 	bool goForward();

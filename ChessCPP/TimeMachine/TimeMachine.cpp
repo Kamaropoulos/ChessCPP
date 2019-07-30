@@ -10,7 +10,7 @@ bool TimeMachine::goBackwards() {
 	this->isTimeTravelling = true;
 
 	// Reset board
-	this->board->reset();
+	this->game->reset();
 	this->board->createPieces();
 
 	// Pop last move from back stack into forward stack
@@ -19,9 +19,7 @@ bool TimeMachine::goBackwards() {
 
 	// Replay all moves from back
 	for (auto move : this->back._Get_container()) {
-		if (!this->game->movePiece(move->getPlayer(), move->getOrigin()->toString(), move->getDestination()->toString())) {
-			return false;
-		}
+		this->game->movePiece(move->getPlayer(), move->getOrigin()->toString(), move->getDestination()->toString(), false);
 	}
 	return true;
 }

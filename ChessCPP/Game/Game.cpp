@@ -83,12 +83,23 @@ Game::Game() {
 	this->scorePlayer1 = 0;
 	this->scorePlayer2 = 0;
 
-	vector<Position*> moves = this->board->getSquare("b2")->getPiece()->getAvailableMoves(this->board);
-
 	this->_printBoard();
 }
 
-bool Game::movePiece(int player, string origin, string destination) {
+void Game::reset() {
+	// Create a new board
+	this->board->reset();
+
+	// Create chess pieces and attach them to their starting squares
+	this->board->createPieces();
+
+	this->playerTurn = 1;
+
+	this->scorePlayer1 = 0;
+	this->scorePlayer2 = 0;
+}
+
+bool Game::movePiece(int player, string origin, string destination, bool addToTimeMachine) {
 	// If it's not this player's turn, return false
 	if (this->playerTurn != player) return false;
 
@@ -135,9 +146,10 @@ bool Game::movePiece(int player, string origin, string destination) {
 
 				this->playerTurn = (playerTurn == 1) ? 2 : 1;
 
-				this->tm->addMove(move);
-
-				this->_printBoard();
+				if (addToTimeMachine) {
+					this->tm->addMove(move);
+					this->_printBoard();
+				}
 
 				return true;
 			}
@@ -157,6 +169,10 @@ vector<Position*> Game::getAvailableMoves(Position* pos) {
 		return vector<Position*>();
 	}
 	return this->board->getSquare(pos)->getPiece()->getAvailableMoves(this->board);
+}
+
+int Game::getPlayer() {
+	return this->playerTurn;
 }
 
 bool Game::goBack() {
