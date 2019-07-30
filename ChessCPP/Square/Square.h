@@ -17,6 +17,7 @@ private:
 	Color color;
 public:
 	Square(Color color);
+	~Square();
 	void placePiece(Piece* piece);
 	bool hasPiece();
 	Piece* getPiece();

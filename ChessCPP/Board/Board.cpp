@@ -138,6 +138,16 @@ Square* Board::getSquare(Position* pos) {
 }
 
 void Board::reset() {
+	// Cleanup old squares
+	for (int file = 0; file < 8; ++file) {
+		for (int rank = 0; rank < 8; ++rank) {
+			delete this->squares[file][rank];
+		}
+		delete this->squares[file];
+	}
+	delete this->squares;
+
+
 	// Initialize 2d array to hold Squares
 	this->squares = new Square * *[8];
 

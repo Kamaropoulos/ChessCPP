@@ -15,6 +15,10 @@ Square::Square(Color color) {
 	this->color = color;
 }
 
+Square::~Square() {
+	delete this->piece;
+}
+
 void Square::placePiece(Piece* piece) {
 	this->piece = piece;
 }
