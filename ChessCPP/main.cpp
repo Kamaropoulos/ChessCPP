@@ -18,23 +18,34 @@
  */
 int main() {
 	Game* game = new Game();
-	game->movePiece(1, "b2", "b3");
-	game->movePiece(2, "f7", "f6");
-	game->movePiece(1, "e2", "e4");
-	game->movePiece(2, "f6", "f5");
-	game->movePiece(1, "a2", "a4");
-	game->movePiece(2, "f5", "e4");
-	game->movePiece(1, "d2", "d3");
-	game->movePiece(2, "g7", "g5");
-	game->movePiece(1, "d3", "e4");
-	game->movePiece(2, "g5", "g4");
-	game->movePiece(1, "f2", "f3");
-	game->movePiece(2, "a7", "a6");
-	game->movePiece(1, "f3", "g4");
-	cout << game->getScore().first << " - " << game->getScore().second << endl;
-
-	auto movesA = game->getAvailableMoves(new Position("h2"));
-	for (auto move : movesA) {
-		cout << "move for h2: " << move->toString() << endl;
+	string from, to;
+	while (true) {
+		bool move1 = false;
+		bool move2 = false;
+		do {
+			cout << "Player 1: ";
+			cin >> from >> to;
+			if ((from == "end") && (to == "game")) {
+				goto end;
+			}
+			move1 = game->movePiece(1, from, to);
+		} while (!move1);
+		cout << game->getScore().first << " - " << game->getScore().second << endl;
+		do {
+			cout << "Player 2: ";
+			cin >> from >> to;
+			if ((from == "end") && (to == "game")) {
+				goto end;
+			}
+			move2 = game->movePiece(2, from, to);
+		} while (!move2);
+		cout << game->getScore().first << " - " << game->getScore().second << endl;
 	}
+
+end:;
+
+	//auto movesA = game->getAvailableMoves(new Position("h2"));
+	//for (auto move : movesA) {
+	//	cout << "move for h2: " << move->toString() << endl;
+	//}
 }
