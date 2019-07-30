@@ -98,9 +98,6 @@ bool Game::movePiece(int player, string origin, string destination) {
 			Piece* piece = this->board->getSquare(origin)->getPiece();
 
 			vector<Position*> availableMoves = piece->getAvailableMoves(this->board);
-			for (int i = 0; i < availableMoves.size(); i++) {
-				cout << availableMoves[i]->toString() << endl;
-			}
 
 			// If attempted move exists in the available moves
 			auto it = find_if(availableMoves.begin(), availableMoves.end(), [&move](Position* obj) {return obj->toString() == move->getDestination()->toString(); });
@@ -136,6 +133,8 @@ bool Game::movePiece(int player, string origin, string destination) {
 				this->tm.addMove(move);
 
 				this->_printBoard();
+
+				return true;
 			}
 		}
 	}
