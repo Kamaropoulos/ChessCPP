@@ -15,5 +15,7 @@ public:
 	bool goForwards();
 	bool resume();
 	void addMove(Move* move);
+	vector<Move*> getBackStackMoves();
+	vector<Move*> getForwardStackMoves();
 };
 

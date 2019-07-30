@@ -4,18 +4,18 @@
  * @brief ChessCPP entry file.
  * @version 0.1
  * @date 2019-07-06
- * 
+ *
  * @copyright Copyright (c) 2019
- * 
+ *
  */
 
 #include "Game/Game.h"
 
-/**
- * @brief Entry point.
- * 
- * @return int 
- */
+ /**
+  * @brief Entry point.
+  *
+  * @return int
+  */
 int main() {
 	Game* game = new Game();
 	game->New();
@@ -41,14 +41,14 @@ int main() {
 				}
 			}
 		} while (!move);
-		
+
 		cout << game->getScore().first << " - " << game->getScore().second << endl;
 	}
 
 end:;
 	game->Save("testfile1.txt");
 
-	game->Load("testfile1.txt");
+	//game->Load("testfile1.txt");
 
 
 	//auto movesA = game->getAvailableMoves(new Position("h2"));

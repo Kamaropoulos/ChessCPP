@@ -131,24 +131,78 @@ bool Game::Load(string filename) {
 }
 
 bool Game::Save(string filename) {
+	// We can only save if it's 1st player's turn
 	if (this->playerTurn == 2) {
 		return false;
 	}
+	// Open the file for writing
 	ofstream savefile(filename);
 	if (savefile.is_open()) {
+		char SEP = CHAR_MAX;
+
+		// Serialize pieces data
+
+		// Get all pieces in a vector
 		vector<Piece*> pieces = this->board->getPieces();
+		// for every piece
 		for (auto piece : pieces) {
+			// Get the values we need to store
 			char file = piece->getPosition()->getFile();
 			char rank = piece->getPosition()->getRank();
 			char letter = piece->pieceName()[0];
 			if (piece->getColor() == BLACK) letter = tolower(letter);
 			char isMoved = piece->hasMoved() ? 1 : 0;
 
+			// Write the values to the file
 			savefile.write((char*)& file, sizeof(char));
 			savefile.write((char*)& rank, sizeof(char));
 			savefile.write((char*)& letter, sizeof(char));
 			savefile.write((char*)& isMoved, sizeof(char));
 		}
+		// Add separator
+		savefile.write((char*)& SEP, sizeof(char));
+
+		// Serialize TimeMachine stacks data
+
+		// Get TM stack data
+		vector<Move*> backMoves = this->tm->getBackStackMoves();
+		vector<Move*> forwardMoves = this->tm->getForwardStackMoves();
+
+		// Write TM back stack moves
+		for (auto move : backMoves) {
+			char originFile = move->getOrigin()->getFile();
+			char originRank = move->getOrigin()->getRank();
+			char destFile = move->getDestination()->getFile();
+			char destRank = move->getDestination()->getRank();
+			char player = move->getPlayer();
+
+			savefile.write((char*)& originFile, sizeof(char));
+			savefile.write((char*)& originRank, sizeof(char));
+			savefile.write((char*)& destFile, sizeof(char));
+			savefile.write((char*)& destRank, sizeof(char));
+			savefile.write((char*)& player, sizeof(char));
+		}
+
+		// Add separator
+		savefile.write((char*)& SEP, sizeof(char));
+
+		// Write TM forward stack moves
+		for (auto move : backMoves) {
+			char originFile = move->getOrigin()->getFile();
+			char originRank = move->getOrigin()->getRank();
+			char destFile = move->getDestination()->getFile();
+			char destRank = move->getDestination()->getRank();
+			char player = move->getPlayer();
+
+			savefile.write((char*)& originFile, sizeof(char));
+			savefile.write((char*)& originRank, sizeof(char));
+			savefile.write((char*)& destFile, sizeof(char));
+			savefile.write((char*)& destRank, sizeof(char));
+			savefile.write((char*)& player, sizeof(char));
+		}
+
+		// ^ BAD, not DRY, I'd rather put that on an internal method and call it twice.
+
 		savefile.close();
 	}
 	else {

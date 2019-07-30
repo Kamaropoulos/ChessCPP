@@ -72,3 +72,21 @@ void TimeMachine::addMove(Move* move) {
 	}
 	this->back.push(move);
 }
+
+vector<Move*> TimeMachine::getBackStackMoves() {
+	vector<Move*> moves;
+	for (auto move : this->back._Get_container()) {
+		moves.push_back(move);
+	}
+	return moves;
+}
+
+vector<Move*> TimeMachine::getForwardStackMoves() {
+	vector<Move*> moves;
+	for (auto move : this->forward._Get_container()) {
+		moves.push_back(move);
+	}
+	return moves;
+}
+
+
