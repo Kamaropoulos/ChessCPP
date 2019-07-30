@@ -20,10 +20,10 @@ int main() {
 	Game* game = new Game();
 	string from, to;
 	while (true) {
-		bool move1 = false;
-		bool move2 = false;
+		bool move = false;
+
 		do {
-			cout << "Player 1: ";
+			cout << "Player " << game->getPlayer() << ": ";
 			cin >> from >> to;
 			if ((from == "end") && (to == "game")) {
 				goto end;
@@ -32,23 +32,10 @@ int main() {
 				game->goBack();
 			}
 			else {
-				move1 = game->movePiece(1, from, to);
+				move = game->movePiece(game->getPlayer(), from, to);
 			}
-		} while (!move1);
-		cout << game->getScore().first << " - " << game->getScore().second << endl;
-		do {
-			cout << "Player 2: ";
-			cin >> from >> to;
-			if ((from == "end") && (to == "game")) {
-				goto end;
-			}
-			if ((from == "go") && (to == "back")) {
-				game->goBack();
-			}
-			else {
-				move2 = game->movePiece(2, from, to);
-			}
-		} while (!move2);
+		} while (!move);
+		
 		cout << game->getScore().first << " - " << game->getScore().second << endl;
 	}
 
