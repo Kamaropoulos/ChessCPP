@@ -67,5 +67,7 @@ public:
 
 	Square* getSquare(Position* pos);
 
+	vector<Piece*> getPieces();
+
 	void reset();
 };

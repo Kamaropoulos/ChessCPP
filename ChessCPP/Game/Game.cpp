@@ -12,6 +12,7 @@
 #include "Game.h"
 
 #include <algorithm>
+#include <fstream>
 
 #include "../Position/Position.h"
 #include "../Move/Move.h"
@@ -69,21 +70,91 @@ void Game::_printBoard() {
   * It creates a new board and the pieces for the two players.
   */
 Game::Game() {
-	// Create a new board
-	this->board = new Board();
+	this->inGame = false;
+}
 
-	// Create Time Machine
-	this->tm = new TimeMachine(this, this->board);
+bool Game::New() {
+	if (inGame) {
+		this->reset();
+		this->inGame = true;
+	}
+	else {
+		// Create a new board
+		this->board = new Board();
 
-	// Create chess pieces and attach them to their starting squares
-	this->board->createPieces();
+		// Create Time Machine
+		this->tm = new TimeMachine(this, this->board);
 
-	this->playerTurn = 1;
+		// Create chess pieces and attach them to their starting squares
+		this->board->createPieces();
 
-	this->scorePlayer1 = 0;
-	this->scorePlayer2 = 0;
+		this->playerTurn = 1;
 
-	this->_printBoard();
+		this->scorePlayer1 = 0;
+		this->scorePlayer2 = 0;
+
+		this->_printBoard();
+
+		this->inGame = true;
+	}
+	return true;
+}
+
+bool Game::Load(string filename) {
+	ifstream savefile(filename, ios::in | ios::binary);
+	if (savefile.is_open()) {
+		savefile.seekg(0, ios::end);
+		size_t fileSize = savefile.tellg();
+		savefile.seekg(0, ios::beg);
+
+		// create a vector to hold all the bytes in the file
+		std::vector<char> data(fileSize, 0);
+
+		// read the file
+		savefile.read(&data[0], fileSize);
+		cout << "File is " << fileSize << " bytes long." << endl;
+		for (int i = 0; i < data.size(); i+=4) {
+			int file = data[i];
+			int rank = data[i + 1];
+			char letter = data[i + 2];
+			bool isMoved = data[i + 3];
+
+			cout << "Read a piece with: file=" << file << " rank=" << rank
+				<< " letter=" << letter << " isMoved=" << (isMoved ? 1 : 0) << endl;
+		}
+		savefile.close();
+	}
+	else {
+		return false;
+	}
+	return true;
+}
+
+bool Game::Save(string filename) {
+	if (this->playerTurn == 2) {
+		return false;
+	}
+	ofstream savefile(filename);
+	if (savefile.is_open()) {
+		vector<Piece*> pieces = this->board->getPieces();
+		for (auto piece : pieces) {
+			char file = piece->getPosition()->getFile();
+			char rank = piece->getPosition()->getRank();
+			char letter = piece->pieceName()[0];
+			if (piece->getColor() == BLACK) letter = tolower(letter);
+			char isMoved = piece->hasMoved() ? 1 : 0;
+
+			savefile.write((char*)& file, sizeof(char));
+			savefile.write((char*)& rank, sizeof(char));
+			savefile.write((char*)& letter, sizeof(char));
+			savefile.write((char*)& isMoved, sizeof(char));
+		}
+		savefile.close();
+	}
+	else {
+		return false;
+	}
+	return true;
 }
 
 void Game::reset() {
@@ -131,12 +202,7 @@ bool Game::movePiece(int player, string origin, string destination, bool addToTi
 						this->scorePlayer2 += this->board->getSquare(destination)->getPiece()->getValue();
 					}
 					// Remove enemy piece
-					move->setTakenPiece(this->board->getSquare(destination)->getPiece());
-					move->setResult(TAKE);
 					this->board->getSquare(destination)->emptySquare();
-				}
-				else {
-					move->setResult(MOVE);
 				}
 				// Move piece to its destination
 				this->board->getSquare(destination)->placePiece(this->board->getSquare(origin)->getPiece());

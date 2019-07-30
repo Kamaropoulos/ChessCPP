@@ -18,6 +18,7 @@
  */
 int main() {
 	Game* game = new Game();
+	game->New();
 	string from, to;
 	while (true) {
 		bool move = false;
@@ -45,6 +46,10 @@ int main() {
 	}
 
 end:;
+	game->Save("testfile1.txt");
+
+	game->Load("testfile1.txt");
+
 
 	//auto movesA = game->getAvailableMoves(new Position("h2"));
 	//for (auto move : movesA) {

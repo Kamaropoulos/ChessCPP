@@ -137,6 +137,19 @@ Square* Board::getSquare(Position* pos) {
 	return this->getSquare(pos->toString());
 }
 
+vector<Piece*> Board::getPieces() {
+	vector<Piece*> pieces;
+	for (int rank = 1; rank <= 8; ++rank) {
+		for (int file = 1; file <= 8; ++file) {
+			Position* currentPosition = new Position(file, rank);
+			if (this->getSquare(currentPosition)->hasPiece())
+				pieces.push_back(this->getSquare(currentPosition)->getPiece());
+			delete currentPosition;
+		}
+	}
+	return pieces;
+}
+
 void Board::reset() {
 	// Cleanup old squares
 	for (int file = 0; file < 8; ++file) {

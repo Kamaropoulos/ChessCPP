@@ -30,6 +30,7 @@ private:
 	unsigned char playerTurn;
 	void _printStatus();
 	void _printBoard();
+	bool inGame = false;
 
 public:
 	void reset();
@@ -38,6 +39,10 @@ public:
 	 * 
 	 */
 	Game();
+
+	bool New();
+	bool Load(string filename);
+	bool Save(string filename);
 
 	bool movePiece(int player, string origin, string destination, bool addToTimeMachine = true);
 	pair<int, int> getScore();
