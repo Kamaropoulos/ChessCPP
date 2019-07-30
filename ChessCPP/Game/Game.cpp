@@ -16,6 +16,8 @@
 #include "../Position/Position.h"
 #include "../Move/Move.h"
 
+#include "../TimeMachine/TimeMachine.h"
+
 void Game::_printStatus() {
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };
 	for (int rank = 1; rank <= 8; ++rank) {
@@ -69,6 +71,9 @@ void Game::_printBoard() {
 Game::Game() {
 	// Create a new board
 	this->board = new Board();
+
+	// Create Time Machine
+	this->tm = new TimeMachine(this, this->board);
 
 	// Create chess pieces and attach them to their starting squares
 	this->board->createPieces();
@@ -130,7 +135,7 @@ bool Game::movePiece(int player, string origin, string destination) {
 
 				this->playerTurn = (playerTurn == 1) ? 2 : 1;
 
-				this->tm.addMove(move);
+				this->tm->addMove(move);
 
 				this->_printBoard();
 
@@ -152,4 +157,10 @@ vector<Position*> Game::getAvailableMoves(Position* pos) {
 		return vector<Position*>();
 	}
 	return this->board->getSquare(pos)->getPiece()->getAvailableMoves(this->board);
+}
+
+bool Game::goBack() {
+	bool res = this->tm->goBackwards();
+	this->_printBoard();
+	return res;
 }

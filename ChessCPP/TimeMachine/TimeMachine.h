@@ -1,14 +1,16 @@
 #pragma once
-#include <stack>
-#include "../Board/Board.h"
-#include "../Move/Move.h"
+#include "../Game/Game.h"
+#include "../MovesStack/MovesStack.h"
 class TimeMachine {
 private:
-	stack<Move*> back;
-	stack<Move*> forward;
+	MovesStack back;
+	MovesStack forward;
 	bool isTimeTravelling = false;
+	Game* game = nullptr;
+	Board* board = nullptr;
 
 public:
+	TimeMachine(Game* game, Board* board);
 	bool goBackwards();
 	bool goForwards();
 	bool resume();

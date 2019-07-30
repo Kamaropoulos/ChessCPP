@@ -12,7 +12,8 @@
 #pragma once
 #include <string>
 #include "../Board/Board.h"
-#include "../TimeMachine/TimeMachine.h"
+
+class TimeMachine;
 
 using namespace std;
 
@@ -23,7 +24,7 @@ using namespace std;
 class Game {
 private:
 	Board* board;
-	TimeMachine tm;
+	TimeMachine* tm;
 	int scorePlayer1;
 	int scorePlayer2;
 	unsigned char playerTurn;
@@ -40,4 +41,7 @@ public:
 	bool movePiece(int player, string origin, string destination);
 	pair<int, int> getScore();
 	vector<Position*> getAvailableMoves(Position* pos);
+
+	bool goBack();
+	bool goForward();
 };

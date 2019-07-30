@@ -28,7 +28,12 @@ int main() {
 			if ((from == "end") && (to == "game")) {
 				goto end;
 			}
-			move1 = game->movePiece(1, from, to);
+			if ((from == "go") && (to == "back")) {
+				game->goBack();
+			}
+			else {
+				move1 = game->movePiece(1, from, to);
+			}
 		} while (!move1);
 		cout << game->getScore().first << " - " << game->getScore().second << endl;
 		do {
@@ -37,7 +42,12 @@ int main() {
 			if ((from == "end") && (to == "game")) {
 				goto end;
 			}
-			move2 = game->movePiece(2, from, to);
+			if ((from == "go") && (to == "back")) {
+				game->goBack();
+			}
+			else {
+				move2 = game->movePiece(2, from, to);
+			}
 		} while (!move2);
 		cout << game->getScore().first << " - " << game->getScore().second << endl;
 	}
