@@ -21,17 +21,10 @@ private:
 	Position* origin;
 	Position* destination;
 	int player;
-	MoveResult result;
-	Piece* takenPiece = nullptr;
 
 public:
 	Move(int player, Position* origin, Position* destination);
 	Position* getOrigin();
 	Position* getDestination();
 	int getPlayer();
-	void setResult(MoveResult result);
-	void setTakenPiece(Piece* takenPiece);
-	MoveResult getResult();
-	Piece* getTakenPiece();
 };
-
