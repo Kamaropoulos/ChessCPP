@@ -28,6 +28,7 @@ public:
 	Move(int player, Position* origin, Position* destination);
 	Position* getOrigin();
 	Position* getDestination();
+	int getPlayer();
 	void setResult(MoveResult result);
 	void setTakenPiece(Piece* takenPiece);
 	MoveResult getResult();

@@ -25,6 +25,10 @@ Position* Move::getDestination() {
 	return this->destination;
 }
 
+int Move::getPlayer() {
+	return this->player;
+}
+
 void Move::setResult(MoveResult result) {
 	this->result = result;
 }
