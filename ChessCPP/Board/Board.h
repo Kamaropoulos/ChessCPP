@@ -70,4 +70,6 @@ public:
 	vector<Piece*> getPieces();
 
 	void reset();
+
+	void attachPiece(Piece* piece);
 };

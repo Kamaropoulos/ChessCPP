@@ -19,6 +19,13 @@
 
 #include "../TimeMachine/TimeMachine.h"
 
+#include "../Pieces/Pawn/Pawn.h"
+#include "../Pieces/Knight/Knight.h"
+#include "../Pieces/Bishop/Bishop.h"
+#include "../Pieces/Rook/Rook.h"
+#include "../Pieces/King/King.h"
+#include "../Pieces/Queen/Queen.h"
+
 void Game::_printStatus() {
 	string* files = new string[9]{ "", "a", "b", "c", "d", "e", "f", "g", "h" };
 	for (int rank = 1; rank <= 8; ++rank) {
@@ -76,7 +83,10 @@ Game::Game() {
 
 bool Game::New() {
 	if (inGame) {
+		// Reset game
 		this->reset();
+		// Create chess pieces and attach them to their starting squares
+		this->board->createPieces();
 		this->inGame = true;
 	}
 	else {
@@ -94,14 +104,25 @@ bool Game::New() {
 		this->scorePlayer1 = 0;
 		this->scorePlayer2 = 0;
 
-		this->_printBoard();
-
 		this->inGame = true;
 	}
 	return true;
 }
 
 bool Game::Load(string filename) {
+	if (inGame) {
+		// Reset game
+		this->reset();
+		this->inGame = true;
+	}
+	else {
+		// Create a new board
+		this->board = new Board();
+
+		// Create Time Machine
+		this->tm = new TimeMachine(this, this->board);
+	}
+
 	ifstream savefile(filename, ios::in | ios::binary);
 	if (savefile.is_open()) {
 		char SEP = CHAR_MAX;
@@ -145,7 +166,35 @@ bool Game::Load(string filename) {
 			char letter = piecesData[i + 2];
 			bool isMoved = piecesData[i + 3];
 
-			// TODO: Create and attach the pieces
+			// Create piece
+			Piece* piece;
+			// Select piece type
+			switch (tolower(letter)) {
+				case 'p':
+					piece = new Pawn(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				case 'n':
+					piece = new Knight(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				case 'b':
+					piece = new Bishop(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				case 'k':
+					piece = new King(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				case 'q':
+					piece = new Queen(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				case 'r':
+					piece = new Rook(new Position(file, rank), isupper(letter) ? WHITE : BLACK);
+					break;
+				default:
+					throw;
+			}
+
+			// Attach piece to board
+			this->board->attachPiece(piece);
+			
 			cout << "Read a piece with: file=" << file << " rank=" << rank
 				<< " letter=" << letter << " isMoved=" << (isMoved ? 1 : 0) << endl;
 		}
@@ -199,12 +248,17 @@ bool Game::Load(string filename) {
 				<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
 		}
 
-
 		savefile.close();
 	}
 	else {
 		return false;
 	}
+	this->playerTurn = 1;
+
+	this->scorePlayer1 = 0;
+	this->scorePlayer2 = 0;
+
+	this->inGame = true;
 	return true;
 }
 
@@ -293,9 +347,6 @@ bool Game::Save(string filename) {
 void Game::reset() {
 	// Create a new board
 	this->board->reset();
-
-	// Create chess pieces and attach them to their starting squares
-	this->board->createPieces();
 
 	this->playerTurn = 1;
 

@@ -29,10 +29,10 @@ private:
 	int scorePlayer2;
 	unsigned char playerTurn;
 	void _printStatus();
-	void _printBoard();
 	bool inGame = false;
 
 public:
+	void _printBoard();
 	void reset();
 	/**
 	 * @brief Construct a new Game object

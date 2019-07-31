@@ -200,3 +200,8 @@ void Board::reset() {
 		startWithColor = (Color)!startWithColor;
 	}
 }
+
+void Board::attachPiece(Piece* piece) {
+	cout << piece->getPosition()->getFile() << piece->getPosition()->getRank() << endl;
+	this->squares[piece->getPosition()->getFile()-1][piece->getPosition()->getRank()-1]->placePiece(piece);
+}

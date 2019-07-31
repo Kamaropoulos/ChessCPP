@@ -18,7 +18,19 @@
   */
 int main() {
 	Game* game = new Game();
-	game->New();
+	string cmd1, cmd2;
+	cout << "Command: ";
+	cin >> cmd1 >> cmd2;
+	if ((cmd1 == "new") && (cmd2 == "game")) {
+		game->New();
+		goto play;
+	}
+	if (cmd1 == "load") {
+		game->Load(cmd2);
+		goto play;
+	}
+play:
+	game->_printBoard();
 	string from, to;
 	while (true) {
 		bool move = false;
@@ -26,6 +38,10 @@ int main() {
 		do {
 			cout << "Player " << game->getPlayer() << ": ";
 			cin >> from >> to;
+			if (from == "load") {
+				game->Load(to);
+				break;
+			}
 			if ((from == "end") && (to == "game")) {
 				goto end;
 			}
