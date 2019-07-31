@@ -125,7 +125,7 @@ bool Game::Load(string filename) {
 
 	ifstream savefile(filename, ios::in | ios::binary);
 	if (savefile.is_open()) {
-		char SEP = CHAR_MAX;
+		char SEP = 127;
 
 		savefile.seekg(0, ios::end);
 		size_t fileSize = savefile.tellg();
@@ -291,7 +291,7 @@ bool Game::Save(string filename) {
 	// Open the file for writing
 	ofstream savefile(filename);
 	if (savefile.is_open()) {
-		char SEP = CHAR_MAX;
+		char SEP = 127;
 
 		// Serialize pieces data
 
