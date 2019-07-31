@@ -65,11 +65,29 @@ public:
 	 */
 	Square* getSquare(string notation);
 
+	/**
+	 * @brief Get a square using a Position object
+	 * 
+	 * @param pos 
+	 * @return Square* The Square for the passed file and rank
+	 */
 	Square* getSquare(Position* pos);
 
+	/**
+	 * @brief Get all the pieces in the game
+	 * 		  Used for exporting and saving the pieces' info into a savefile
+	 * 
+	 * @return vector<Piece*> 
+	 */
 	vector<Piece*> getPieces();
 
+	// Resets the state of the board for time travelling
 	void reset();
 
+	/**
+	 * @brief Attaches a piece to the board based on it's internal position
+	 * 
+	 * @param piece 
+	 */
 	void attachPiece(Piece* piece);
 };
