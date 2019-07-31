@@ -48,7 +48,7 @@ int main() {
 end:;
 	game->Save("testfile1.txt");
 
-	//game->Load("testfile1.txt");
+	game->Load("testfile1.txt");
 
 
 	//auto movesA = game->getAvailableMoves(new Position("h2"));

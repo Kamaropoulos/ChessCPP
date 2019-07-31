@@ -50,6 +50,7 @@ void Game::_printBoard() {
 			if (square->hasPiece()) {
 				Piece* piece = square->getPiece();
 				char representation = piece->pieceName()[0];
+				if (piece->pieceName() == "Knight") representation = 'N';
 				if (piece->getColor() == BLACK) representation = tolower(representation);
 				cout << representation << " ";
 				//cout << piece->getPosition()->toString() << " ";
@@ -103,6 +104,8 @@ bool Game::New() {
 bool Game::Load(string filename) {
 	ifstream savefile(filename, ios::in | ios::binary);
 	if (savefile.is_open()) {
+		char SEP = CHAR_MAX;
+
 		savefile.seekg(0, ios::end);
 		size_t fileSize = savefile.tellg();
 		savefile.seekg(0, ios::beg);
@@ -110,18 +113,93 @@ bool Game::Load(string filename) {
 		// create a vector to hold all the bytes in the file
 		std::vector<char> data(fileSize, 0);
 
-		// read the file
+		std::vector<char> piecesData;
+		int searchCursor = 0;
+
+		// Get all bytes into the vector
 		savefile.read(&data[0], fileSize);
 		cout << "File is " << fileSize << " bytes long." << endl;
-		for (int i = 0; i < data.size(); i+=4) {
-			int file = data[i];
-			int rank = data[i + 1];
-			char letter = data[i + 2];
-			bool isMoved = data[i + 3];
 
+		// Separate piece data
+		for (int i = searchCursor; i < data.size(); i++) {
+			// We want to find the point where the piece data end
+			// and the TimeMachine data start. The transition point
+			// at the first CHAR_MAX (SEP) byte. That's where we'll
+			// set the search cursor in order to continue from that
+			// part for constructing the Time Machine data again.
+			if (data[i] != SEP) {
+				piecesData.push_back(data[i]);
+			}
+			else {
+				// Increase i to "consume" separator character
+				searchCursor = ++i;
+				break;
+			}
+		}
+
+		cout << "piecesData.size()=" << piecesData.size() << endl;
+		// Parse the piece data
+		for (int i = 0; i < piecesData.size(); i+=4) {
+			int file = piecesData[i];
+			int rank = piecesData[i + 1];
+			char letter = piecesData[i + 2];
+			bool isMoved = piecesData[i + 3];
+
+			// TODO: Create and attach the pieces
 			cout << "Read a piece with: file=" << file << " rank=" << rank
 				<< " letter=" << letter << " isMoved=" << (isMoved ? 1 : 0) << endl;
 		}
+
+		// Separate TM stack data
+		vector<char> backData;
+		for (int i = searchCursor; i < data.size(); i++) {
+			// We want to find the point where the back stack data end
+			// and the forward stack data start. The transition point
+			// at the first CHAR_MAX (SEP) byte. That's where we'll
+			// set the search cursor in order to continue from that
+			// part for constructing the forward stack data again.
+			if (data[i] != SEP) {
+				backData.push_back(data[i]);
+			}
+			else {
+				// Increase i to "consume" separator character
+				searchCursor = ++i;
+				break;
+			}
+		}
+
+		// Parse the TM back stack data
+		for (int i = 0; i < backData.size(); i += 5) {
+			int originFile = backData[i];
+			int originRank = backData[i + 1];
+			int destFile = backData[i + 2];
+			int destRank = backData[i + 3];
+			int player = backData[i + 4];
+
+			// TODO: Create and attach the pieces
+			cout << "Read a back stack elem: orF=" << originFile << " orR=" << originRank
+				<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
+		}
+
+		vector<char> forwardData;
+		for (int i = searchCursor; i < data.size(); i++) {
+			forwardData.push_back(data[i]);
+		}
+
+		// Parse the TM forward stack data
+		for (int i = 0; i < forwardData.size(); i += 5) {
+			int originFile = forwardData[i];
+			int originRank = forwardData[i + 1];
+			int destFile = forwardData[i + 2];
+			int destRank = forwardData[i + 3];
+			int player = forwardData[i + 4];
+
+			// TODO: Create and attach the pieces
+			cout << "Read a forward stack elem: orF=" << originFile << " orR=" << originRank
+				<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
+		}
+
+
 		savefile.close();
 	}
 	else {
@@ -150,6 +228,7 @@ bool Game::Save(string filename) {
 			char file = piece->getPosition()->getFile();
 			char rank = piece->getPosition()->getRank();
 			char letter = piece->pieceName()[0];
+			if (piece->pieceName() == "Knight") letter = 'N';
 			if (piece->getColor() == BLACK) letter = tolower(letter);
 			char isMoved = piece->hasMoved() ? 1 : 0;
 
@@ -187,7 +266,7 @@ bool Game::Save(string filename) {
 		savefile.write((char*)& SEP, sizeof(char));
 
 		// Write TM forward stack moves
-		for (auto move : backMoves) {
+		for (auto move : forwardMoves) {
 			char originFile = move->getOrigin()->getFile();
 			char originRank = move->getOrigin()->getRank();
 			char destFile = move->getDestination()->getFile();
