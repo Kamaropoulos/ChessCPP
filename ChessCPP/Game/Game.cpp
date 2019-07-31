@@ -139,7 +139,7 @@ bool Game::Load(string filename) {
 
 		// Get all bytes into the vector
 		savefile.read(&data[0], fileSize);
-		cout << "File is " << fileSize << " bytes long." << endl;
+		//cout << "File is " << fileSize << " bytes long." << endl;
 
 		// Separate piece data
 		for (int i = searchCursor; i < data.size(); i++) {
@@ -158,7 +158,7 @@ bool Game::Load(string filename) {
 			}
 		}
 
-		cout << "piecesData.size()=" << piecesData.size() << endl;
+		//cout << "piecesData.size()=" << piecesData.size() << endl;
 		// Parse the piece data
 		for (int i = 0; i < piecesData.size(); i+=4) {
 			int file = piecesData[i];
@@ -194,9 +194,9 @@ bool Game::Load(string filename) {
 
 			// Attach piece to board
 			this->board->attachPiece(piece);
-			
+			/*
 			cout << "Read a piece with: file=" << file << " rank=" << rank
-				<< " letter=" << letter << " isMoved=" << (isMoved ? 1 : 0) << endl;
+				<< " letter=" << letter << " isMoved=" << (isMoved ? 1 : 0) << endl;*/
 		}
 
 		// Separate TM stack data
@@ -225,9 +225,13 @@ bool Game::Load(string filename) {
 			int destRank = backData[i + 3];
 			int player = backData[i + 4];
 
-			// TODO: Create and attach the pieces
-			cout << "Read a back stack elem: orF=" << originFile << " orR=" << originRank
-				<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
+			// Create move to push
+			Move* move = new Move(player, new Position(originFile, originRank), new Position(destFile, destRank));
+
+			this->tm->pushMoveBack(move);
+
+			//cout << "Read a back stack elem: orF=" << originFile << " orR=" << originRank
+			//	<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
 		}
 
 		vector<char> forwardData;
@@ -243,9 +247,12 @@ bool Game::Load(string filename) {
 			int destRank = forwardData[i + 3];
 			int player = forwardData[i + 4];
 
-			// TODO: Create and attach the pieces
-			cout << "Read a forward stack elem: orF=" << originFile << " orR=" << originRank
-				<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
+			Move* move = new Move(player, new Position(originFile, originRank), new Position(destFile, destRank));
+
+			this->tm->pushMoveForward(move);
+
+			//cout << "Read a forward stack elem: orF=" << originFile << " orR=" << originRank
+			//	<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
 		}
 
 		savefile.close();

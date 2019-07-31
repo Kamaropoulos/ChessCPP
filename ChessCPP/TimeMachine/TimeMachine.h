@@ -17,5 +17,7 @@ public:
 	void addMove(Move* move);
 	vector<Move*> getBackStackMoves();
 	vector<Move*> getForwardStackMoves();
+	void pushMoveBack(Move* move);
+	void pushMoveForward(Move* move);
 };
 

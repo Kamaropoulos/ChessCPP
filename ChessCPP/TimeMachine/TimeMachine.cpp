@@ -89,4 +89,11 @@ vector<Move*> TimeMachine::getForwardStackMoves() {
 	return moves;
 }
 
+void TimeMachine::pushMoveBack(Move* move) {
+	this->back.push(move);
+}
 
+void TimeMachine::pushMoveForward(Move* move) {
+	this->forward.push(move);
+	this->isTimeTravelling = true;
+}

@@ -42,8 +42,12 @@ play:
 				game->Load(to);
 				break;
 			}
+			if (from == "save") {
+				game->Save(to);
+				break;
+			}
 			if ((from == "end") && (to == "game")) {
-				goto end;
+				return 0;
 			}
 			if ((from == "go") && (to == "back")) {
 				game->goBack();
@@ -60,15 +64,5 @@ play:
 
 		cout << game->getScore().first << " - " << game->getScore().second << endl;
 	}
-
-end:;
-	game->Save("testfile1.txt");
-
-	game->Load("testfile1.txt");
-
-
-	//auto movesA = game->getAvailableMoves(new Position("h2"));
-	//for (auto move : movesA) {
-	//	cout << "move for h2: " << move->toString() << endl;
-	//}
+	return 0;
 }
