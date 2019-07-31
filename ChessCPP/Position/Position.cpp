@@ -1,4 +1,5 @@
 #include "Position.h"
+#include <stdexcept>
 
 int Position::_letterToNumber(char letter) {
 	// Add 1 to start from 1 instead of 0
@@ -45,7 +46,7 @@ Position::Position(string posStr) {
 			return;
 		}
 	}
-	throw exception("Invalid position string!");
+	throw runtime_error("Invalid position string!");
 }
 
 Position::Position(int file, int rank) {
@@ -56,7 +57,7 @@ Position::Position(int file, int rank) {
 
 		return;
 	}
-	throw exception("Invalid position!");
+	throw runtime_error("Invalid position!");
 }
 
 void Position::set(string posStr) {
@@ -72,7 +73,7 @@ void Position::set(string posStr) {
 			return;
 		}
 	}
-	throw exception("Invalid position string!");
+	throw runtime_error("Invalid position string!");
 }
 
 void Position::set(int file, int rank) {
@@ -83,7 +84,7 @@ void Position::set(int file, int rank) {
 
 		return;
 	}
-	throw exception("Invalid position!");
+	throw runtime_error("Invalid position!");
 }
 
 void Position::setFile(int file) {
@@ -93,7 +94,7 @@ void Position::setFile(int file) {
 
 		return;
 	}
-	throw exception("Invalid position!");
+	throw runtime_error("Invalid position!");
 }
 
 void Position::setFile(char file) {
@@ -104,7 +105,7 @@ void Position::setFile(char file) {
 
 		return;
 	}
-	throw exception("Invalid position!");
+	throw runtime_error("Invalid position!");
 }
 
 void Position::setRank(int rank) {
@@ -114,7 +115,7 @@ void Position::setRank(int rank) {
 
 		return;
 	}
-	throw exception("Invalid position!");
+	throw runtime_error("Invalid position!");
 }
 
 int Position::getFile() {
