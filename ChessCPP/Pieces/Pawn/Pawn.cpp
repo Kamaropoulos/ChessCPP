@@ -31,7 +31,7 @@ vector<Position*> Pawn::getAvailableMoves(Board* board) {
 			posToCheck->gotoTop();
 			// If piece can move to square (move or take)
 			MoveCheckResult res = this->_checkMove(posToCheck, board);
-			if ((res != CANT_MOVE)) {
+			if ((res == CAN_MOVE)) {
 				// Push as available move
 				availableMoves.push_back(new Position(posToCheck));
 			}
@@ -45,7 +45,7 @@ vector<Position*> Pawn::getAvailableMoves(Board* board) {
 				// If piece can move to square (move or take)
 				posToCheck->setRank(posToCheck->getRank() + 2);
 				MoveCheckResult res = this->_checkMove(posToCheck, board);
-				if ((res != CANT_MOVE)) {
+				if ((res == CAN_MOVE)) {
 					// Push as available move
 					availableMoves.push_back(new Position(posToCheck));
 				}
