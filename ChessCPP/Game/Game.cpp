@@ -236,7 +236,19 @@ bool Game::Load(string filename) {
 
 		vector<char> forwardData;
 		for (int i = searchCursor; i < data.size(); i++) {
-			forwardData.push_back(data[i]);
+			// We want to find the point where the bforward stack data end
+			// and the player scores start. The transition point
+			// at the first CHAR_MAX (SEP) byte. That's where we'll
+			// set the search cursor in order to continue from that
+			// part for constructing the forward stack data again.
+			if (data[i] != SEP) {
+				forwardData.push_back(data[i]);
+			}
+			else {
+				// Increase i to "consume" separator character
+				searchCursor = ++i;
+				break;
+			}
 		}
 
 		// Parse the TM forward stack data
@@ -255,15 +267,17 @@ bool Game::Load(string filename) {
 			//	<< " destF=" << destFile << " destR=" << destRank << " player=" << player << endl;
 		}
 
+		// Load player scores
+		this->scorePlayer1 = data[searchCursor];
+		this->scorePlayer2 = data[++searchCursor];
+
 		savefile.close();
 	}
 	else {
 		return false;
 	}
-	this->playerTurn = 1;
 
-	this->scorePlayer1 = 0;
-	this->scorePlayer2 = 0;
+	this->playerTurn = 1;
 
 	this->inGame = true;
 	return true;
@@ -341,7 +355,15 @@ bool Game::Save(string filename) {
 			savefile.write((char*)& player, sizeof(char));
 		}
 
-		// ^ BAD, not DRY, I'd rather put that on an internal method and call it twice.
+		// ^ BAD practice, not DRY, I'd rather put that on an internal method and call it twice.
+
+		// Add separator
+		savefile.write((char*)& SEP, sizeof(char));
+
+		// Write scores
+		// Add separator
+		savefile.write((char*)& this->scorePlayer1, sizeof(char));
+		savefile.write((char*)& this->scorePlayer2, sizeof(char));
 
 		savefile.close();
 	}
