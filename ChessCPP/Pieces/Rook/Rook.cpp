@@ -165,9 +165,5 @@ vector<Position*> Rook::getAvailableMoves(Board* board) {
 	}
 	catch (...) {}
 	
-	for (auto move : availableMoves) {
-		cout << move->toString() << endl;
-	}
-
 	return availableMoves;
 }

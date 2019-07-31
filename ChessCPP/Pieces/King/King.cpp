@@ -96,9 +96,5 @@ vector<Position*> King::getAvailableMoves(Board* board) {
 		}
 	}
 
-	for (auto move : availableMoves) {
-		cout << move->toString() << endl;
-	}
-
 	return availableMoves;
 }
